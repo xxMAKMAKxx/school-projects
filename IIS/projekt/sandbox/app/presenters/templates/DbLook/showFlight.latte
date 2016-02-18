@@ -1,0 +1,36 @@
+{block content}
+    <h1 n:block="title">Seznam dostupnych Letu:</h1>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+    {foreach $flights as $flight}
+    <div class="post">
+
+        <h2>Flight ID: {$flight->flight_id}</h2>
+
+        <div><b>Odlet:</b> {date("G:i:s F jS, Y",strtotime($flight->departure))}</div>
+		<div><b>Prilet:</b> {date("G:i:s F jS, Y",strtotime($flight->arrival))}</div>
+		<div><b>Z:</b> {$flight->from}</div>
+		<div><b>Do:</b> {$flight->to}</div>
+		<div><b>Spolecnost:</b> {$flight->company}</div>
+		<div><b>Vlozeno uzivatelem:</b> {$flight->employee_login}</div>
+		<div><b>ID letadla:</b> {$flight->plane_id}</div>
+		<div><b>ID gatu_test:</b> {$flight->gate_id}</div>
+		{foreach $internal_flights as $item}
+			{if $item->flight_id == $flight->flight_id}
+				<div><b>Zastupujici spolecnost:</b> {$item->representing_company}</div>
+				<div><b>Nabidka napoju:</b> {$item->drink}</div>
+			{/if}
+		{/foreach}
+		{foreach $international_flights as $item}
+			{if $item->flight_id == $flight->flight_id}
+				<div><b>Nabidka sluzeb:</b> {$item->services}</div>
+				<div><b>Nabidka filmu:</b> {$item->movies}</div>
+				<div><b>Nabidka jidla:</b> {$item->food_list}</div>
+			{/if}
+		{/foreach}
+		{if $EmpType >= 2}
+		<center><a n:href="DbAdd:editFlight $flight->flight_id">Upravit let</a></center>
+		{/if}
+    </div>
+    {/foreach}
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br></br></br>
+{/block}

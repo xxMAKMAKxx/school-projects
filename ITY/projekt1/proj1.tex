@@ -1,0 +1,95 @@
+%1. projekt do ITY
+%Martin Kacmarcik - xkacma03, FIT VUTBR
+
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[left=2cm,text={17cm,24cm},top=2.5cm]{geometry}
+\usepackage[cp1250]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage[czech]{babel}
+\usepackage{times}
+\providecommand{\uv}[1]{\quotedblbase #1\textquotedblleft}
+
+\title{Typografie a publikování\\1. projekt}
+\author{Martin Kaèmarèík\\xkacma03@stud.fit.vutbr.cz}
+\date{}
+
+\begin{document}
+\maketitle
+	
+\section{Hladká sazba}
+
+Hladká sazba je sazba z jednoho stupnì, druhu a øezu pí­sma sázená na 
+stanovenou šíøku odstavce. Skládá se 
+z odstavcù, které obvykle zaèínají­ zarážkou, ale 
+mohou být sázeny i bez zarážky -- rozhodují­cí­ je celková grafická 
+úprava. Odstavce jsou ukonèeny 
+východovou øádkou. Vìty nesmìjí zaèínat èíslicí.
+\par
+Barevné zvýraznìní­, podtrhávání­ slov èi rùzné velikosti písma 
+vybraných slov se zde také nepoužívá. 
+Hladká sazba je urèena pøedevším pro delší­ texty, jako 
+je napøí­klad beletrie. Porušení­ konzistence sazby pùsobí v textu 
+rušivì a unavuje ètenáøùv zrak.
+
+\section{Smíšená sazba}
+
+Smíšená sazba má o nìco volnìjší­ pravidla, jak hladká sazba. Nejèastìji 
+se klasická hladká sazba doplòuje 
+o další øezy pí­sma pro zvýraznìní­ dùležitých 
+pojmù. Existuje \uv{pravidlo}:
+\par
+\begin{quotation}
+\textsc{Èí­m ví­ce druhù, øezù, velikostí, barev pí­sma a jiných efektù 
+použijeme, tí­m profesionálnìji bude  
+dokument vypadat. Ètenáø tím bude vždy nadšen!}
+\end{quotation}
+\par
+Tí­mto pravidlem se \underline{nikdy} nesmí­te øí­dit. Pøíliš èasté 
+zvýrazòování 
+textových elementù  a zmìny {\huge V}{\LARGE E}{\Large L}{\large I}{
+\normalsize K}{\small O}{\footnotesize S}{\scriptsize T}{\tiny I} 
+pí­sma {\Large jsou} {\LARGE známkou} \textbf{\huge amatérismu} autora 
+a pùsobí­ 
+\textit{\textbf{velmi} rušivì}. Dobøe navržený dokument nemá obsahovat ví­ce než 4 øezy èi 
+druhy pí­sma. \texttt{Dobøe navržený 
+dokument je decentní­, ne chaotický.}
+\par
+Dùležitým znakem správnì vysázeného dokumentu je konzistentní 
+použí­vání­ rùzných druhù zvýraznìní­. To 
+napøí­klad mùže znamenat, že \textbf{tuèný øez} pí­sma bude 
+vyhrazen pouze pro klíèová slova, \textsl{sklonìný øez} pouze pro doposud neznámé 
+pojmy a nebude se to míchat. 
+Sklonìný øez nepùsobí­ tak rušivì a používá se èastìji. 
+V \LaTeX u jej sází­me radìji pøí­kazem \verb|\emph{text}| než \verb|\textit{text}|.
+\par
+Smíšená sazba se nejèastìji používá pro sazbu vìdeckých èlánkù a 
+technických zpráv. U delší­ch dokumentù 
+vìdeckého èi technického charakteru je zvykem 
+upozornit ètenáøe na význam rùzných typù zvýraznìní­ v úvodní­ kapitole.
+
+\section{Èeské odlišnosti}
+
+Èeská sazba se oproti okolní­mu svìtu v nìkterých aspektech mí­rnì 
+liší­. Jednou z odlišností je sazba 
+uvozovek. Uvozovky se v èeštinì použí­vají­ pøevážnì 
+pro zobrazení­ pøí­mé øeèi. V menší­ míøe se použí­vají­ také pro 
+zvýraznìní­ pøezdí­vek a ironie. V 
+èeštinì se použí­vá tento \uv{typ uvozovek} namísto 
+anglických ``uvozovek".
+\par
+Ve smíšené sazbì se øez uvozovek øí­dí­ øezem první­ho uvozovaného 
+slova. Pokud je uvozována celá vìta, 
+sází­ se koncová teèka pøed uvozovku, pokud se 
+uvozuje slovo nebo èást vìty, sází­ se teèka za uvozovku.
+\par
+Druhou odlišností je pravidlo pro sázení­ koncù øádkù. V èeské sazbì by 
+øádek nemìl konèit osamocenou 
+jednopí­smennou pøedložkou nebo spojkou (spojkou \uv{a} 
+konèit mùže pøi sazbì do 25 liter). Abychom \LaTeX u zabránili v sázení­ 
+osamocených pøedložek, vkládáme mezi 
+pøedložku a slovo nezlomitelnou mezeru znakem \verb|~| 
+(vlnka, tilda). Pro automatické doplnìní vlnek slouží­ volnì šiøitelný 
+program \textit{vlna} od pana Olšáka.\footnote
+{Viz ftp://math.feld.cvut.cz/pub/olsak/vlna/.}
+
+\end{document}

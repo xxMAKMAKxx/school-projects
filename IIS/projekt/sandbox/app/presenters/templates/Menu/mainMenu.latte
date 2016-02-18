@@ -1,0 +1,68 @@
+{block content}
+<h1> Menu pro informacni system letiste </h1>
+
+
+<center>
+<h3> Sekce: Gaty </h3>
+{if $EmpType == 3}
+<p><a n:href="DbAdd:addGate">Pridat novy gate</a></p>
+{/if}
+{* <p><a n:href="DbSearch:searchGate">Vyhledat gaty</a></p> *}
+<p><a n:href="DbLook:showGate">Zobrazit gaty</a></p>
+</center>
+<center>
+<h3> Sekce: Terminaly </h3>
+{if $EmpType == 3}
+<p><a n:href="DbAdd:addTerminal">Pridat novy terminal</a></p>
+{/if}
+<p><a n:href="DbLook:showTerminal">Zobrazit terminaly</a></p>
+</center>
+
+{if $user->isInRole('manager') || $user->isInRole('supervisor')}
+    <center>
+        <h3> Sekce: Letadla </h3>
+        {if $EmpType == 3}
+            <p><a n:href="DbAdd:addPlane">Pridat nove letadlo</a></p>
+        {/if}
+        {*<p><a n:href="DbSearch:searchPlane">Vyhledat letadla</a></p>*}
+        {*<p><a n:href="DbLook:showPlane">Zobrazit/Upravit letadla</a></p>*}
+        <p><a n:href="DbSearch:searchPlane">Zobrazit/Upravit letadla</a></p>
+    </center>
+{/if}
+
+
+<center>
+
+<h3> Sekce: Lety </h3>
+{*<p><a n:href="DbSearch:searchFlight">Vyhledat lety</a></p>*}
+{if $EmpType == 3}
+<p><a n:href="DbAdd:addFlight 0">Pridat novy <b>vnitrostatni</b> let</a></p>
+<p><a n:href="DbAdd:addFlight 1">Pridat novy <b>mezinarodni</b> let</a></p>
+{/if}
+</center>
+<center>
+{*<p><a n:href="DbLook:showFlight">Zobrazit/Upravit lety</a></p>*}
+<p><a n:href="DbSearch:searchFlight">Zobrazit/Upravit lety</a></p>
+</center>
+
+{if $EmpType >= 2}
+    <center>
+        <h3> Sekce: Zamestnanci</h3>
+        {if $EmpType == 3}
+            <p><a n:href="DbAdd:addEmployee">Pridat noveho zamestnance</a></p>
+        {/if}
+        {*<p><a n:href="DbSearch:searchEmployee">Vyhledat zamestnance</a></p>*}
+        {*<p><a n:href="DbLook:showEmployee">Zobrazit/Upravit zamestnance</a></p>*}
+        <p><a n:href="DbSearch:searchEmployee">Zobrazit/Upravit zamestnance</a></p>
+    </center>
+{/if}
+
+<center>
+<h3> Sekce: Letenky</h3>
+{*<p><a n:href="DbAdd:addTicket">Pridat novou letenku</a></p>*}
+<p><a n:href="DbSearch:searchFlight">Pridat novou letenku</a></p>
+<p><a n:href="DbSearch:searchFlight">Zobrazit/Upravit letenku</a></p>
+{*<p><a n:href="DbSearch:searchFlight">Vydat palubnu vstupenku</a></p>*}
+</center>
+
+{/block}

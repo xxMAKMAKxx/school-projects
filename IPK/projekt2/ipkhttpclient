@@ -1,0 +1,181 @@
+#!/usr/bin/env python3
+
+#######################################
+# IPK proj2                           #
+# by Martin Kacmarcik                 #
+# xkacma03                            #
+# Fakulta informacnich technologii    #
+# Vysoke uceni technicke v Brn2       #
+# For the horde!!!                    #
+#######################################
+
+import os, re, getopt, urllib.parse, datetime, sys, socket
+
+
+#global functions definition
+argumentArray={"help" : 0, "URI" : "" }
+
+#function that print help
+def printHelp():
+    print("Simple http client by Martin Kacmarcik - xkacma03")
+    print("FIT VUTBR 2015 - IPK course")
+    print("Usage: ./ipkhttpclient [-h] [--help] URI")
+    print("[-h/--help] - Write down the help")
+    print("URI - the URI in rfc3986 format e.g. http://localhost:80")
+    print("Example of usage: ./ipkhttpclient http://localhost:80")
+
+
+#argument processing function
+def argumentParsing(argv):
+    global argumentArray
+    helpBool = 0
+    try:
+        opts, args = getopt.getopt(argv, "h", ["help"])
+    except getopt.GetoptError:
+        sys.stderr.write('Error: Bad parameters. Type --help for help.\n')
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if(opt == "-h" or opt == "--help"):
+            helpBool = 1
+
+    if(helpBool == 1):
+        printHelp()
+        sys.exit(0)
+    if(len(argv) == 1):
+        argumentArray["URI"] = argv[0]
+    else:
+        sys.stderr.write('Error: Bad parameters. Type --help for help.\n')
+        sys.exit(2)
+
+
+
+#START main body
+if __name__ == "__main__":
+    #parse arguments
+    argumentParsing(sys.argv[1:])
+
+    #default host port  etc
+    HOST, PORT = "localhost", 8888
+    data = ""
+
+    #time stamp
+    time = datetime.datetime.now()
+    timeStamp = time.strftime("%Y-%m-%d:%H:%M:%S")
+
+    #pro open file processing
+    clientHeader = "ipkHttpClient"
+    clientInName = clientHeader+"-"+timeStamp+".in.log"
+    clientOutName = clientHeader+"-"+timeStamp+".out.log"
+    clientHeader = "ipkResp-"+timeStamp+".header"
+    clientPayload = "ipkResp-"+timeStamp+".payload"
+    #open the files
+    clientInFile = open(clientInName, "w")
+    clientOutFile = open(clientOutName, "w")
+    clientHeaderFile = open(clientHeader, "w")
+    clientPayloadFile = open(clientPayload, "w")
+
+    #processing of URI
+    uri = urllib.parse.urlsplit(argumentArray["URI"])
+    HOST = re.sub(r'(.*):(.*)', r'\1', uri.netloc)
+    PORT = re.sub(r'(.*):(.*)', r'\2', uri.netloc)
+    if(re.search(":[0-9]+", uri.netloc)):
+        PORT = int(PORT)
+    else:
+        PORT = 80
+    if(uri.path == ''):
+        path = '/'
+    else:
+        path = uri.path
+    #creating request header
+    requestHeader = "GET "+path+' HTTP/1.1\r\n'
+    requestHeader += "Host: "+uri.netloc+"\r\n"
+    requestHeader += "Accept: text/plain\r\n"
+    requestHeader += "Connection: keep-alive\r\n"
+    requestHeader += "\r\n"
+
+
+    #create new socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+        # Connect to server and send data
+        try:
+            sock.connect((HOST, PORT))
+        except ConnectionRefusedError:
+            print("Error: Cannot connect to server.")
+            sys.exit(111)
+        #send request u created earlier
+        sock.sendall(bytes(requestHeader, "utf-8"))
+        clientOutFile.write(requestHeader)
+
+        #recieve msg, default is 1024 blocks, which will be reconstructed into one block in the while cycle
+        recv = sock.recv(1024)
+        #rec is next recv msg
+        rec = sock.recv(1024)
+        #recieve msg until "none" (0 bytes) is sent
+        while rec != b'':
+            recv += rec
+            rec = sock.recv(1024)
+        #recv is originaly in bytes, now we transform it into string in utf-8 encoding
+        #determine encoding
+        encoding = 'utf-8'
+        if(re.search("charset=", str(recv))):
+            encoding = re.sub(".*charset=([a-zA-Z0-9-]+).*", r'\1', str(recv))
+        recv = str(recv, encoding)
+        #print("Rec je: "+rec)
+        #write what we get from server into in file
+        clientInFile.write(recv)
+        if not(re.search("chunked", recv)): #if chunked wasn't found, u dont have to reconstruct the file and you can easily write into payload and header files
+            #split the header and the body of the file recieved
+            splitRecv = re.split('\r\n\r\n', recv, maxsplit=1)
+            #write into files
+            clientHeaderFile.write(splitRecv[0])
+            payload = splitRecv[1]
+            payload = payload[:-2]
+            clientPayloadFile.write(payload)
+        else: #on the other hand, if chunked was found, you need to delete the lenght and reconstruct the original message
+            #now we get header and the rest of the chunk
+            splitRecv = re.split('\r\n\r\n', recv, maxsplit=1)
+            #we can write header now
+            clientHeaderFile.write(splitRecv[0])
+            #but we most reconstruct the data (e.g. delete hexadeicmal lenght of chunks)
+            reconstructedChunk = ""
+            #split chunk contains the first lenght of chunk and the rest of the chunk
+            splitChunk = re.split('\r\n', splitRecv[1] ,maxsplit=1)
+            unreconstructedChunk = ""
+
+            #now I have in 0 the lenght of chunk and in 1 the rest of the chunk
+            #chunkSize is converted into decimal so we don't have to do it later
+            chunkSize = int(splitChunk[0], 16)
+            #until we have the ending chunk with 0 lenght, we reconstruct the original msg
+            while(chunkSize != 0):
+                #into unreconstructed chunk we save the rest of the chunk without header
+                unreconstructedChunk = splitChunk[1]
+                #part of reconstructed chunk is unreconstructed chunk plus chunkSize-times characters of the splitChunk without the length
+                reconstructedChunk += unreconstructedChunk[:chunkSize]
+                #from unreconstructed chunk we want to delete the part of the characters we read and also the \r\n at the end of the message
+                unreconstructedChunk = unreconstructedChunk[chunkSize + 2:]
+                #we repeat the split so we have another size and the rest of the under. chunk in our variable
+                splitChunk = re.split('\r\n', unreconstructedChunk ,maxsplit=1)
+                #again the conversion to decimal
+                chunkSize = int(splitChunk[0], 16)
+            #just write into file the reconstructed msg
+            clientPayloadFile.write(reconstructedChunk)
+
+
+    #except error
+    except socket.gaierror:
+        sys.stderr.write("Error: Bad adress\n")
+        exit(5)
+    #at the end close the socket
+    finally:
+        sock.close()
+    #close files
+    clientInFile.close()
+    clientOutFile.close()
+    clientHeaderFile.close()
+    clientPayloadFile.close()
+
+
+#END main body

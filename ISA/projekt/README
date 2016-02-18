@@ -1,0 +1,20 @@
+ISA Project - xkacma03 - Martin Kacmarcik - Faculty of Information Technology - Brno University of Technology
+Simple SMTP client - has all requirements implemented and working.
+Signals are handled correctly - are cleaning memory also and ending connection.
+Checked IPv4 and IPv6, different ports - all working and sending correctly.
+Valgrind was cool in all cases - no leaks, I did the impossible - Valgrind was satisfied.
+Program is checking all kinds of mistakes etc, has final state machine to check syntax of the input file.
+Sample of usage:
+----------------
+IPv4 address:
+./smtpklient -a 127.0.0.1 -p 25 -i inputFile.txt -w 2
+IPv6 address:
+./smtpklient -a ::1 -p 28 -i inputFile.txt -w 10
+NonExistingFile
+./smtpklient -i nonExistingFile
+--> Error while opening file...
+Print help:
+./smtpklient -h
+--> Print help...
+
+All combinations should be OK.. did hard memory tests and hope fixed all bugs. Clean as lakatos's income.

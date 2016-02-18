@@ -1,0 +1,12 @@
+{block content}
+<a n:href="DbSearch:searchPlane">Zpet na vypis letadel</a></br></br>
+<p>Posledni revize: {date("F j, Y", strtotime($last_revision))}</p>
+<p>Aktualni datum: {date("F j, Y")}</p>
+<p>Revize plati: 2 roky</p>
+
+
+<p>Platnots revize: {if $is_valid}<font color="green">PLATNA</font>{/if}{if !$is_valid}<font color="red">NEPLATNA</font>{/if}</p>
+
+
+
+{/block}

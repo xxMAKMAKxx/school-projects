@@ -1,0 +1,14 @@
+{block content}
+    <h1 n:block="title">Seznam dostupnych Terminalu:</h1>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+    {foreach $terminals as $terminal}
+    <div class="post">
+
+        <h2>Terminal ID: {$terminal->terminal_id}</h2>
+
+        <div>Nabizene sluzby pri terminalu: {$terminal->services}</div>
+		<div>Typ terminalu: {$terminal->terminal_type}</div>
+    </div>
+    {/foreach}
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br></br></br>
+{/block}

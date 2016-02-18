@@ -1,0 +1,240 @@
+#!/usr/bin/env python3
+
+#######################################
+# IPK proj2                           #
+# by Martin Kacmarcik                 #
+# xkacma03                            #
+# Fakulta informacnich technologii    #
+# Vysoke uceni technicke v Brn2       #
+# For the horde!!!                    #
+#######################################
+
+import os, re, getopt, urllib, datetime, sys, socketserver, time
+
+#global functions definition
+argumentArray={"help" : 0, "chunk-size" : -1, "port" : -1, "chunk-time" : -1 }
+
+#function that print help
+def printHelp():
+    print("Simple http server by Martin Kacmarcik - xkacma03")
+    print("FIT VUTBR 2015 - IPK course")
+    print("Usage: ./ipkhttpclient [-h] [-c chunk-max-size] [-p port]")
+    print("[-h/--help] - Write down the help")
+    print("[-c/--chunk-max-size] - Maximal size of data in chunk")
+    print("[-p/--port] - TCP port on which the server will listen")
+    print("[-t/--min-chuck-time] - Minimal time before sending next chunk, max is double this value")
+    print("Example of usage: ./ipkhttpserver -p 80 -c 4096 -t 8")
+
+
+#argument processing function
+def argumentParsing(argv):
+    global argumentArray
+    helpBool = 0
+    try:
+        opts, args = getopt.getopt(argv, "hc:p:t:", ["help", "chunk-max-size=", "port=", "min-chunk-time="])
+    except getopt.GetoptError:
+        sys.stderr.write('Error: Bad parameters. Type --help for help.\n')
+        sys.exit(2)
+
+    for opt, arg in opts:
+        if(opt == "-h" or opt == "--help"):
+            helpBool = 1
+        elif(opt == "-c" or opt == "--chunk-max-size"):
+            argumentArray["chunk-size"] = arg
+        elif(opt == "-p" or opt == "--port"):
+            argumentArray["port"] = arg
+        elif(opt == "-t" or opt == "--min-chunk-time"):
+            argumentArray["chunk-time"] = arg
+
+
+    if(helpBool == 1):
+        printHelp()
+        sys.exit(0)
+
+class MAKHandler(socketserver.BaseRequestHandler):
+    """
+    The RequestHandler class for my server
+
+    It is instantied once per connection to the server and must
+    override the handle() method to impelement communication to
+    the client.
+    """
+    #simple function that return content of the file given
+    def file_get_content(self, filename):
+        try:
+            with open(filename, 'r', encoding='utf8') as f:
+                return f.read()
+        except (OSError, IOError):
+            exit(3)
+
+
+    def handle(self):
+        #some variables declaration
+        header = ""
+        data = ""
+        dontWrite = 0
+        sendData = ""
+
+        #self.request is the TCP socket connected to the client
+        self.data = self.request.recv(1024).strip()
+        serverFileIn.write("\n"+str(self.data, 'utf-8'))
+        strData = str(self.data)
+
+        #########################################
+        #now server need to reply back to client#
+
+        #check if there is GET element with filename
+        if(re.search("GET\s+(.+)\s+HTTP.*", strData)):
+            fileRequested = re.sub("[\s\S]*GET\s(.*)\sHTTP[\s\S]*", r'\1', strData)
+            if(fileRequested == "/"):
+                fileRequested = "/index"
+            else:
+                fileRequested = re.sub(r'.*?(\/.*)', r'\1', fileRequested)
+            #If file is not found, sent 404 not found
+            if not(os.path.exists("./www"+fileRequested)):
+                header = "HTTP/1.1 404 Not Found\r\n"
+                header+= "Content-Type: text/plain\r\n"
+                data = "File not found in my database\r\n"
+        #If GET element is not found sent back error.
+        else:
+            header = "HTTP/1.1 400 Bad Request\r\n"
+            header+= "Content-Type: text/plain\r\n"
+            data = "Missing file name! You need to want some page back! :)\r\n"
+        #check the host header:
+        if(re.search(r'Host: .+:[0-9]+', strData)):
+            hostName = re.sub(r'[\s\S]*Host: (.+?:[0-9]+)[\s\S]*', r'\1', strData)
+        #if its not there, sent back error
+        else:
+            header = "HTTP/1.1 400 Bad Request\r\n"
+            header+= "Content-Type: text/plain\r\n"
+            data = "Your message doesn't have Host! Please check HTTP/1.1 spec. for more information"
+        #if data and header are empty, no error was set and you can proceed to sending the content of the file required
+        if(data == "" and header == ""):
+            #-------------NOT CHUNK SECTION-------------
+            #if the file requested has size equal or smaller then MAX_CHUNK_SIZE, we can send it right now
+            if(os.path.getsize('./www'+fileRequested) <= MAX_CHUNK_SIZE):
+                header = "HTTP/1.1 200 OK\r\n"
+                header+= "Content-Type: text/plain\r\n"
+                data = self.file_get_content('./www'+fileRequested)
+                data += "\r\n"
+            #----------CHUNK SECTION -------------
+            #else we need to set header with chunked transfer and send each chunk
+            else:
+                dontWrite = 1
+                #send header with the fact server will send chunked data
+                header = "HTTP/1.1 200 OK\r\n"
+                header+= "Content-Type: text/plain\r\n"
+                header+= "Transfer-Encoding: chunked\r\n"
+                self.request.sendall(bytes(header+"\r\n", 'utf-8'))
+                #write into out file
+                serverFileOut.write(header+"\r\n")
+                try:
+                    chunkedFile = open('./www'+fileRequested)
+                except IOError:
+                    sys.exit(7)
+                #read MAX_CHUNK_SIZE characters
+                chunk = chunkedFile.read(MAX_CHUNK_SIZE)
+                #repeat until there is nothing more to be sent
+                while(chunk != ""):
+                    sendData = ""
+                    sendData2 = ""
+                    chunkLenght = hex(len(chunk))
+                    chunkLenght = re.sub("0x(.*)", r'\1', chunkLenght)
+                    #now send the lenght of the incoming chunk in hex format
+                    sendData += chunkLenght+"\r\n"
+                    self.request.sendall(bytes(sendData, 'utf-8'))
+                    serverFileOut.write(sendData)
+                    #then send the part of the chunk
+                    sendData2 += chunk+"\r\n"
+                    self.request.sendall(bytes( sendData2, 'utf-8'))
+                    serverFileOut.write(sendData2)
+                    #simulate the traffic
+                    time.sleep(MIN_CHUNK_TIME/1000)
+                    #read another MAX_CHUNK_SIZE characters
+                    chunk = chunkedFile.read(MAX_CHUNK_SIZE)
+                    #print("chunk je: "+chunk)
+                #send the ending chunk
+                self.request.sendall(bytes("0\r\n", 'utf-8'))
+                serverFileOut.write("0\r\n")
+        #if chunk was needed, dont send it, chunk will send it on its own
+        if(dontWrite == 0):
+            #write into log file
+            serverFileOut.write(header+"\r\n"+data)
+            self.request.sendall(bytes(header+"\r\n"+data, 'utf-8'))
+        #closing the request
+        self.request.close()
+
+#new class, without it MAKHandler wouldn't see variables from main (don't know why)
+class myServerClass(socketserver.TCPServer):
+
+    def __init__(self, HOST, PORT):
+        self.HOST = HOST
+        self.PORT = PORT
+        try:
+            socketserver.TCPServer.__init__(self, (HOST, PORT), MAKHandler)
+        except OSError:
+            print("Error: port is still being used, please wait a bit longer and then try again.")
+            sys.exit(14)
+
+
+
+#START main body
+if __name__ == "__main__":
+    global timeStamp
+    #parse arguments
+    argumentParsing(sys.argv[1:])
+    #set some default varaibles
+    HOST, PORT = "localhost", 8888
+    MIN_CHUNK_TIME = 0
+    MAX_CHUNK_SIZE = 1024
+    #get time and make names of the files to be written in
+    timeXXX = datetime.datetime.now()
+    timeStamp = timeXXX.strftime("%Y-%m-%d:%H:%M:%S")
+    serverHeader = "ipkHttpServer"
+    serverInName = serverHeader+"-"+timeStamp+".in.log"
+    serverOutName = serverHeader+"-"+timeStamp+".out.log"
+    #open the files
+    try:
+        serverFileIn = open(serverInName, "w")
+    except IOError:
+        sys.exit(4)
+    try:
+        serverFileOut = open(serverOutName, "w")
+    except IOError:
+        sys.exit(4)
+
+    #if argument was given set variables
+    if(argumentArray["port"] != -1):
+        try:
+            PORT = int(argumentArray["port"])
+        except ValueError:
+            print("Error: Port need to be a number!")
+            sys.exit(11)
+    if(argumentArray["chunk-size"] != -1):
+        try:
+            MAX_CHUNK_SIZE = int(argumentArray["chunk-size"])
+        except ValueError:
+            print("Error: Max chunk size need to be a number!")
+            sys.exit(11)
+    if(argumentArray["chunk-time"] != -1):
+        try:
+            MIN_CHUNK_TIME = int(argumentArray["chunk-time"])
+        except ValueError:
+            print("Error: Min chunk time need to be a number!")
+            sys.exit(11)
+
+    #create server
+    try:
+        server = myServerClass(HOST, PORT)
+    except PermissionError:
+        print("Error: Permision denied. Propably bad port.")
+        sys.exit(14)
+
+    #serve forever until KeyBoardInterrupt
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        server.shutdown()
+        serverFileIn.close()
+        serverFileOut.close()
+        sys.exit(0)

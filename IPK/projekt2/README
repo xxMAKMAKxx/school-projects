@@ -1,0 +1,46 @@
+Martin Kačmarčík
+xkacma03 
+FIT VUTBR
+IPK - projekt 2 varianta - jednoduchý HTTP klient/server
+
+Popis implementace:
+K implementaci 2. projektu do IPK jsem zvolil programovací jazyk Python verze 3. Jazyk obsahuje velice šikovné nástroje knihovny pro tento projekt (jako např. SocketServer) a dost mi zjednodušil práci. Také má výbornou práci se stringy, které bylo nutné v projektu poměrně často používat (HTTP header atp.). 
+
+Jako první jsem si v obou scriptech (klient a server) otevřel potřebné soubory pro zápis příchozí/odchozí komunikace a header a payload soubory u klienta. Poté bylo nutné zpracovat parametry, k čemuž využívám funkci getopt, pomocí které naplním argumentArray - slovník obsahující parametry a popř. jejich hodnoty. Defaultní hodnoty obou skriptů jsou: Host: localhost, Port: 8888. Lze samozřejmě změnit pomocí parametrů.
+
+Adresář www obsahuje několik souborů, které obsahují různé texty, včetně souboru velký, který má velikost skoro 8kb. Tento soubor je vhodný pro testování chunked transferu. 
+
+Pokud je zadán parametr help, ostatní parametry jsou ignorpvány.
+Klient:
+Jako první bylo v klientu nutné zpracovat URI, získat HOST a PORT. K tomuto využívám knihovnu urlib.parse.urlsplit, která práci s URI značně zjednodušší. Pokud nebyl v URI zadán požadovaný soubor, implicitně se pošle požadavek na soubor "/". Dále je nutné si zpracovat hlavičku podle HTTP/1.1 standartu, který je nutné implementovat, aby byly podporovány všechny prohlížeče. Klient tedy pošle GET request s HOSTEM (povinné) a content type a požádá o soubor server. 
+
+Dále čeká na odpověď serveru. Klient od serveru příjmá data, pokud v hlavičce nenajde file transfer type chunked, má klient zprávu kompletní s hlavičkou a tělem. Do payload zapíše tělo a do header zapíše hlavičku kterou dostal. Hlavička a tělo jsou odděleny "\r\n\r\n". Do souborů in a out se zapisuje vždy, pokud se příjmá/odesílá a obsah je příjmaný/odesílaný text.
+
+Pokud ovšem byl nalezen náznak chunked transferu, klient příjme data, které následně složí do výsledné zprávy dle následujícího algoritmu: Oddělým hlavičku od těla, tělo splitnu podle prvního "\r\n", což mi oddělí první velikost chunku od zbytku těla. Následně ze zbytku těla vezmu tolik znaků, kolik je decimální velikost čísla, které jsem získal jako velikost prvního chunku a znaky uložím do nové proměnné reprezentující rekonstruovanou zprávu. Z aktuálního těla smažu velikost-chunku-znaků + 2 ("\r\n") a proces opakuji. Ukončovací podmínka je, že velikost chunku je 0 - reprezentuje ukončovací chunk. Nyní mám ve své proměnné reprezentující rekonstruovanou zprávu právě onu zprávu. Následně pouze zavřu sockety.
+
+Server:
+Server si po počáteční inicializaci (otevření souborů atp.) vytvoří nový server (instance třídy myServerClass). Server má přístup k proměnným z hlavní třídy (např. časové razítko při spuštění programu). Novou třídu jsem použil právě kvůli přístupu k proměnným z hlavní třídy, kdy třída prakticky dědí od TPCServeru, kdy při přímé instanciaci TCPServeru jsem přístup k proměnným ve svém Handleru neměl. Handler je část TCPServeru, která říká, jak se má zpracovávat přijatá zpráva od klientů. Handler je tedy mé vlastní implementace a obsahuje zpracování zprávy a odeslíná reakce na zprávu.
+
+První server zkontroluje, jestli obsahuje request povinné náležitosti (GET, Host atp.). Pokud ne, vrací chybu 400 - Bad Request. Dále kontroluje, pokud je požadovaný soubor v adresáři ./www, pokud ne, vrací chybu 404 - File not found. Pokud je požadovaný soubor "/" změní server název na "index". Pokud je doposud vše správně, server si načte do stringu obsah souboru a dále se dívá, jestli je velikost stringu menší rovna maximální velikosti chunku (viz. parametr, defaultní hodnota je 1024). Pokud ano, server vytvoří správnou hlavičku (200 OK) a pošle ji spolu s tělem zpátky klientovi. Pokud ovšem je velikost větší, server si rozdělí zprávu na n částí po MAX_CHUNK_SIZE (defaultně 1024) bytech. Nejdříve pošle klientovi hlavičku, že bude zaslán chunked transfer a poté postupně zasílá velikost chunku a chunk dokud je co číst (tzn dokud read nevrací prázdný řetězec). Nakonec posílá ukončovací chunk s velikostí nula a prázdným tělem. Defaultní hodnota čekání (MIN_TIME na chunk) je 0. 
+
+Pokud je zadán parametr pro MIN_CHUNK_TIME - server se před odesláním nového chunku uspí na dobu zadanou v parametrech. Toto má simulovat zátěž, která je viditelná v běžných webech. Po odeslání všech chunků čeká server na další request. Server se korektně vypne po zachycení KeyInterruptu. 
+
+Pozn na závěr:
+Server úspěšně zpracovává požadavky a odesílá zpátky zprávy. Tyto zprávy jsou zobrazitelné běžnými prohlížeči a klientem z toho projektu (testováno například na Mozille z XUbuntu doporučeném pro testování projektu). Klient úspěšně posílá requesty a získává zpátky zprávy, které v případě chunků úspěšně rekonstrujuje do původní zprávy (uloženo v payloadu). 
+
+TESTY:
+Testy jsem tvoril tak, ze jsem si udelal seznam pozadavku ze zadani a potom delal testy a odskrtaval otestovane pozadavky. Snazil jsem se potom take udelat ruzne kombinace parametru (spatne atp), cokoliv co ma smysl. Vzniklo 10 testu kombinujici testovani parametru, chunku, souboru, neexistujicich souboru, chyb etc. Snad testy pokryvaji vse co ma smysl testovat.
+
+Příklady spuštění:
+
+Server:
+	./ipkhttpserver --help
+	./ipkhttpserver
+	./ipkhttpserver -p 8886
+	./ipkhttpserver  -c 4096 -t 5
+Klient:
+	./ipkhttpclient -h
+	./ipkhttpclient http://localhost:8888
+	./ipkhttpclient http://localhost:1102/index
+	./ipkhttpclient http://localhost:1102/velky
+	./ipkhttpclient http://www.webzdarma.cz

@@ -1,0 +1,21 @@
+{block content}
+    <h1 n:block="title">Seznam dostupnych Letu:</h1>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+    {foreach $planes as $plane}
+    <div class="post">
+
+        <h2>Plane ID: {$plane->plane_id}</h2>
+
+        <div><b>Datum vyroby:</b> {date("F jS, Y",strtotime($plane->manufacture_date))}</div>
+		<div><b>Posledni revize:</b> {date("F jS, Y",strtotime($plane->last_revision))}</div>
+		<div><b>Pocet clenu posadky:</b> {$plane->crew_number}</div>
+		<div><b>Typ letadla:</b> {$plane->plane_type}</div>
+		{if $EmpType == 3}
+		<center><a n:href="DbAdd:editPlane $plane->plane_id">Upravit letadlo</a></center>
+		{/if}
+		<center><a n:href="DbLook:checkRevision $plane->plane_id">Zkontrolovat revizi</a></center>
+    </div>
+    {/foreach}
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br></br></br>
+	
+{/block}

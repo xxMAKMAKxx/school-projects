@@ -1,0 +1,28 @@
+{block content}
+    <h1 n:block="title">Seznam dostupnych zamestnancu:</h1>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+
+	<center>{control searchEmployeeForm}</center>
+
+    {foreach $employees as $employee}
+    <div class="post">
+
+        <h2>Login zamestnance: {$employee->login} ({$employee->role})</h2>
+
+        <div><b>Jmeno:</b> {$employee->name}</div>
+		<div><b>Prijmeni:</b> {$employee->surname}</div>
+		<div><b>Pozice:</b> {$employee->position}</div>
+		<div><b>Nadrizeny:</b> {$employee->superior_login}</div>
+		<div><b>Adresa:</b> {$employee->street}, {$employee->postal_code} {$employee->city}</div>
+		<div><b>Rodcne cislo:</b> {$employee->birth_number}</div>
+		<div><b>Pridan dne:</b> {date("F jS, Y",strtotime($employee->created))}</div>
+		{if $user->isInRole('manager') || $user->isInRole('supervisor')}
+            <center><a n:href="DbAdd:editEmployee $employee->login">Upravit zamestnance</a></center>
+            <center><a n:href="DbEdit:deleteEmployee $employee->login">Smazat zamestnance</a></center>
+        {/if}
+		
+    </div>
+    {/foreach}
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br></br></br>
+	
+{/block}

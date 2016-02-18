@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project fitkitversion="2.0" outputprefix="voltmeter">
+
+	<!--  Project description -->
+	<name>Voltmetr by xkacma03</name>
+	<author>Martin Kacmarcik, Ladislav Čapka, Vojtech Cizinsky</author>
+	<authoremail>xkacma03@stud.fit.vutbr.cz</authoremail>
+	<revision>20090201</revision>
+    <description>Jednoduchy voltmeter s vystupem na VGA.</description>
+
+    <!--  MCU part -->
+    <mcu>
+        <include>mcu/libs/thermometer/package.xml</include>
+		
+		<files>main.c</files>
+		<files>adc.c</files>
+    </mcu>
+
+    <!-- FPGA part -->
+    <fpga dcmfrequency="50MHz" architecture="pc">
+        <include>fpga/ctrls/spi/package.xml</include>
+        <include>fpga/ctrls/vga/package.xml</include>
+        <include>fpga/ctrls/sdram/package.xml</include>
+        <include>fpga/units/rasterizer/line/package.xml</include>
+        <include>fpga/units/fifo/package.xml</include>
+        
+        <file>top_level.vhd</file>
+		
+    </fpga>
+
+</project>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0067)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+    
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+<style type="text/css"></style></head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu
+     podle použitého editoru -->
+
+<h1>Informační systém letiště</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Martin Kačmarčík <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xkacma03@stud.fit.vutbr.cz">xkacma03@stud.fit.vutbr.cz</a> -
+		základ stránky, zobrazení a úpravy jednotlivých prvků databáze
+	</dd>
+	<dd>Martin Kocour <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xkocou08@stud.fit.vutbr.cz">xkocou08@stud.fit.vutbr.cz</a> - 
+		databáze, vyhledávání v databázi a přihlašování uživatelů (včetně kontroly rolí atp)
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://iis.project-mak.eu/">http://iis.project-mak.eu/</a></dd>
+	<dd><a href="http://iis.project-mak.eu/subdom/iis/sandbox/www/">http://iis.project-mak.eu/subdom/iis/sandbox/www/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>xkocou08</td><td>heslo</td><td>Manager</td></tr>
+<tr><td>xkacma03</td><td>heslo</td><td>Supervisor</td></tr>
+<tr><td>xnovak00</td><td>heslo</td><td>Employee</td></tr>
+</tbody></table>
+
+<h2>Implementace</h2>
+<p>Stručná dokumentace k implementaci, která popisuje, které PHP skripty implementují jednotlivé případy použití uvedené v use-case diagramu z IDS. V případě, že bylo nutno při implementaci učinit změny v návrhu, musí být v dokumentaci zdůvodněny. !!! Toto tu nechávám jen pro kontrolu, pak to pls smaž !!!</p>
+
+<p>Pro implementaci byl zvolen PHP framework Nette verze 2.3 a pro databázové účely byla použita databáze typu MySQL. Nette používá pro implementaci stránek tzv. MVC model. Datový model je implementován v tzv. presenterech, kde lze pracovat s daty a dále je převádět do šablon typu latte. Latte je další část MVC modelu - view část. V latte šabloně autor popíše, jak má stránka vypadat a Nette již vygeneruje potřebné HTML tagy automaticky. Tento postup velice zjednodušuje práci. </p>
+
+<p>Stránka se rozděluje na 7 námi tvořených a upravovaných presenterů. Presentery lze najít v "/sandbox/app/presneters/".</p>
+<ul>
+<li><b>DbAddPresenter: </b>přidávání prvků do databáze a také úpravy (přidávání a úprava letů, letadel, terminálu, gateov, zamestnancov...)</li>
+<li><b>DbLookPresenter: </b>stará sa o zpracování dat a předává je do příslušné šablony (kontrola platnosti revize letadla, zobrazit gate, terminal)</li>
+<li><b>DbSearchPresneter: </b>vyhladávanie a zobrazenie letov, lietadiel, zamestnancov, leteniek </li>
+<li><b>HomePagePresneter: </b>uvodní přihlašovací stránka</li>
+<li><b>MenuPresenter: </b>hlavní menu celého inforamčního systému</li>
+<li><b>DbEditPresenter: </b>zmena sedadla cestujucemu</li>
+<li><b>SignPresenter: </b>poskytuje možnosti přihlášení a odhlášení</li>
+</ul>
+
+<p>Pro vykreslení samotné stránky je využita šablona typu latte. Každá stránka má svoji šablonu, ve které pomocí HTML tagů a PHP příkazů popíšeme Nette frameworku jak stránku vykreslit. Šablony lze najít v "/sandbox/app/presneters/templates".</p>
+
+<p>Stránka využívá stylů, které jsou poskytnuty jako výchozí styly.</p>
+
+<h2>Úpravy v návrhu</h2>
+<p>V zásade sa v návrhu nič nezmenilo. Akurát uživateľ s rolou "Manager" môže vykonávať aj úkony spojené s rolou "Vedúci" (v systéme "Supervisor") a teda i úkony obyčajného zamestnanca (v systéme ako "Employee").  Pridali sme do tabuľky "Airport_employee" stĺpect "password". A do tabuľky "Ticket" sme pridali stľpec "price". Prípad užitia "zmeniť typ sedadla" sme pozmenili na "zmeniť sedadlo cestujúcemu". Ďalej prípad užitia "zmeniť čas príletu a odletu" súvisi s úpravou letu, preto sme tento prípad presunuli pod rolu "vedúci" (Supervisor). A pridali sme prípad užitia "vydať palubnú vstupenku cestujúcemu".</p>
+
+<h2>Instalace</h2>
+<ul>
+<li>Obsah archivu staci zkopírovat do příslušné složky používaného serveru (www u Apache atp.). Potom se ke strance da pristupovat pomoci: "domena.neco/sandbox/www". Případně pokud by řešení náhodou nešlo, lze také zkopírovat obsah složky do kořenového adresáře složky používaného serveru (tzn. bude složka WWW nahrazena složkou WWW z archivu) a dále přístupovat klasicky přes domena.neco.</li>
+<li>Viz. <a href=" https://doc.nette.org/cs/2.3/requirements">požadavky nette.</a></li>
+<li>Pro inicializaci databáze stačí provést příložený SQL skript (all.sql). V nastavení /sandbox/app/config/config.local je nutné zadat adresu databáze, uživatele a jeho heslo.</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Není implementováno poslání letadla na revizi, ačkoliv tento use-case existuje. Revize letadla je vsak zkontrolovatelná a informace o revizi letadla v informačním systému také lze najít. Krom tohoto případu jsou všechny případy použití implementovány. Pri update je miesto tlačítka upraviť let pridaj let. Ďalšou menšou chybou, ktorou sme si vedomí je, že v textoch striedame slovenčinu a češtinu. Všetky zmienené chyby boli zapríčinené časovou tiesňou.</p>
+
+</body></html>

@@ -1,0 +1,43 @@
+{block content}
+
+    <h1> Vyhledat let </h1>
+    <p><u>Pozn.: </u>Hrubo oznacene pole je povinne. Vyhladavajte podla ktorehokolvek pola.</p>
+    <p><b>Dejte si pozor na chybnou kombinaci!</b></p>
+    <br>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+
+    <center>{control searchFlightForm}</center>
+
+    {foreach $flights as $flight}
+        <div class="post">
+
+            <h2>Flight ID: {$flight->flight_id}</h2>
+
+            <div><b>Odlet:</b> {date("G:i:s F jS, Y",strtotime($flight->departure))}</div>
+    		<div><b>Prilet:</b> {date("G:i:s F jS, Y",strtotime($flight->arrival))}</div>
+    		<div><b>Z:</b> {$flight->from}</div>
+    		<div><b>Do:</b> {$flight->to}</div>
+    		<div><b>Spolecnost:</b> {$flight->company}</div>
+    		<div><b>Vlozeno uzivatelem:</b> {$flight->employee_login}</div>
+    		<div><b>Cislo letadla:</b> {$flight->plane_id}</div>
+    		<div><b>Cislo gatu:</b> {$flight->gate_id}</div>
+    		<div><b>Typ letadla:</b> {$flight->ref('Plane', 'plane_id')->plane_type}</div>
+    		{if $internalFlight == true}
+                <div><b>Reprezentujici spolecnost:</b> {$flight->representing_company}</div>
+                <div><b>Podavane napoje:</b> {$flight->drink}</div>
+    		{elseif $internationalFlight == true}
+    		    <div><b>Sluzby:</b> {$flight->services}</div>
+                <div><b>Filmy na palube:</b> {$flight->movies}</div>
+                <div><b>Podavane jedlo:</b> {$flight->food_list}</div>
+            {/if}
+    		{if $user->isInRole('manager') || $user->isInRole('supervisor')}
+    		    <center><a n:href="DbAdd:editFlight $flight->flight_id">Upravit let</a></center>
+    		{/if}
+    		<center><a n:href="DbAdd:addTicket2 $flight->flight_id">Pridat letenku</a></center>
+    		<center><a n:href="DbSearch:searchTicket $flight->flight_id">Zobrazit letenky</a></center>
+        </div>
+    {/foreach}
+
+    </br></br><a n:href="Menu:mainMenu">Zpet do menu</a>
+
+{/block}

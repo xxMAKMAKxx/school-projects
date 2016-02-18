@@ -1,0 +1,44 @@
+%4. projekt do ITY by Martin Kacmarcik xkacma03 / FIT VUTBR 2015
+%For the horde!!!
+\documentclass[11pt,a4paper,onecolumn]{article}
+\usepackage[left=2cm,text={17cm,24cm},top=3cm]{geometry}
+\usepackage{times}
+\usepackage[czech]{babel}
+\usepackage[cp1250]{inputenc}
+\usepackage[ddmmyyyy]{datetime}
+\usepackage{url}
+\DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>}\urlstyle{tt}}
+\providecommand{\uv}[1]{\quotedblbase #1\textquotedblleft}
+
+\begin{document}
+\begin{titlepage}
+\begin{center}
+\textsc{{\Huge Vysoké uèení technické v~Brnì}\\\medskip
+		{\huge Fakulta informaèních technologií}}\\
+\vspace{\stretch{0.382}}
+{\LARGE Typografie a publikování\,--\,4. projekt\\\smallskip
+{\Huge Bibliografické citace}}\\
+\vspace{\stretch{0.618}}
+\end{center}
+{\Large \today \hfill Martin Kaèmarèík}
+\end{titlepage}
+\newpage
+\begin{center}
+\Huge{Doba textu}
+\end{center}
+
+\uv{Doba textu}, tak by se dal svìt kolem nás oznaèit. Písmena na nás dnes \uv{útoèí} ze všech stran. Textem toti ideálnì zacílíme na vhodnou skupinu, sdìlíme velké mnoství informací, které by se tøeba do TV spotu nevešly, a jako bonus máme šanci nabídnout tyto informace ve vhodnou chvíli. Vìtšinou toti adresát sáhne po textovém dokumentu v momentì, kdy má chu se mu vìnovat \cite{Dopis}.
+
+Text se skládá z nìkolika komponent. Základem textu je styl dokumentu a obsah (jak vypadá a co øíká). Do stylu dokumentu patøí typografie. Typografie je v dnešní \uv{dobì textu} nesmírnì dùleitá, vypovídá o kvalitì autora dokumentu, text, kterı je typograficky správnì se lépe ète a také se v nìm lépe orientuje. Napøíklad Jakob Nielsen ve své studii \cite{Nielsen} tvrdí, e uivatelé webu neètou, ale pouze scanují. Stránku, která se špatnì scanuje èíst nebudou. Po osobì, která náš text ète vìtšinou chceme, aby našemu textu vìnovala svou vìdomou pozornost, aby ji nìèím upoutal, popøípadnì si z nìj nìco zapamatoval  \cite{slavicek}. Pokud chceme tudí zaujmout, je znalost typografie dùleitá. Pokud máme dokument typografickı špatnì, obyèejnı ètenáø si toho všimne okamitì, pokud je ale v dokumentu malı pøeklep, je velká šance, e si toho obyèejnı ètenáø ani nevšimne \cite{Dopis3}. Chyba by ovšem byla, zamìøovat svùj text pouze na typografii. Velice dùleitı je také obsah dokumentu \cite{lupa}. Uivatelé sice web v rychlosti scanují, ale jakmile se dostanou k poadovanım informacím, zaènou èíst \cite{ebrana}.
+
+Velké mnoství textù se dnes vytváøí na poèítaèi. \uv{Poøizování textù a jejich úprava pomocí poètaèe má øadu vıhod. Poèítaèem lze rychle a efektivnì vytvoøit to, co døíve vznikalo jen pøi pouití sloité technologie a za znaèné spotøeby materiálu.} \cite{rybicka} Jedním z nejlepších nástrojù pro zpracování textu je balík \LaTeX pro program \TeX. Proè zrovna \LaTeX ? Klasické programy jako \texttt{Microsoft Word} apod. nahrazují logickı design \LaTeX u vizuálním designem. Vizuální design je v poøádku pro krátké a jednoduché dokumenty, jako napøíklad dopisy, není ovšem vhodnı pro více komplexní dokumenty jako vìdecké èlánky \cite{lamport}. Napøíklad matematická sazba uívá spoustu rùznıch znakù, písmen, èíslic v rùznıch øezech, èeštinu a další \cite{elearning}. Sazba nìjaké sloitìjší rovnice je ve vizuálním designu horor.
+
+Ne kadı je ovšem zbìhlı v typografickıch pravidlech. Skvìlım startovacím médiem mùe bıt napøíklad èasopis \emph{Typo} \cite{Typo}, kterı vychází jako dvoumìsíèník. Tento èasopis je vìnován typografii, desingu a vizuální komunikaci. Pokud èlovìk má radši elektronické média, pomìrnì kvalitnì je zpracován web Typografie \cite{typografieWeb}, kde lze  o typografii najít spoustu èlánkù.
+
+\newpage
+\renewcommand{\refname}{Literatura}
+\bibliographystyle{czplain}
+\bibliography{zdroje}
+
+
+\end{document}

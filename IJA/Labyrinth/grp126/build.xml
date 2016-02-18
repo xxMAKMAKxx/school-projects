@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Labyrinth" default="compile" basedir=".">
+	
+	<description>
+		Hra Labyrinth: Zabavna hra pre viac hracov
+	</description>
+
+	<!-- set global properties for this build -->
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dest-client"  location="dest-client"/>
+    <property name="lib" location="lib"/>
+    <property name="doc" location="doc"/>
+    <property name="examples" location="examples"/>
+
+	<target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dest-client}"/>
+        <delete dir="${doc}"/>
+    </target>
+	
+	<target name="doc">
+        <delete dir="${doc}"/>
+		<javadoc	sourcepath="${src}"
+					destdir="${doc}"
+					charset="UTF-8"
+					encoding="UTF-8"
+		/>
+    </target>
+	
+	<target name="compile" depends="clean,doc" description="Zkompiluje hru">
+		<mkdir dir="${build}"/>
+		<javac 	srcdir="${src}:${lib}"
+				destdir="${build}"
+				encoding="UTF-8"
+				debug="on"
+				classpath="${src}"
+				includeantruntime="false"
+		/>
+		
+		<mkdir dir="${dest-client}"/>
+		<jar destfile="${dest-client}/ija2015-client.jar" basedir="${build}">
+			<fileset dir="${lib}" excludes="get-libs.sh" />
+            <manifest>
+                <attribute name="Main-Class" value="ija.bluerock.labyrinth.gui.MenuPanel"/>
+            </manifest>
+        </jar>
+		
+		<mkdir dir="${dest-client}/saves"/>
+		<copy file="${examples}/1.mk" todir="${dest-client}/saves" />
+    </target>
+	
+	<target name="run">
+		<java classpath="${src}" jar="${dest-client}/Labyrinth.jar" dir="${dest-client}" fork="true"/>
+    </target>
+	
+</project>
+	

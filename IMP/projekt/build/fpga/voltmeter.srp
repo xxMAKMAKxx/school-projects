@@ -1,0 +1,1316 @@
+Release 13.1 - xst O.40d (nt)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to build/fpga
+Parameter xsthdpdir set to build/fpga
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "build/fpga/voltmeter.prj"
+Input Format                       : mixed
+
+---- Target Parameters
+Output File Name                   : "build/fpga/voltmeter.ngc"
+Output Format                      : NGC
+Target Device                      : xc3s50-4-pq208
+
+---- Source Options
+Top Module Name                    : fpga
+
+---- General Options
+Optimization Goal                  : SPEED
+Optimization Effort                : 1
+Library Search Order               : build/fpga/voltmeter.lso
+RTL Output                         : yes
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "C:/fitkitSVN/fpga/units/clkgen/clkgen_config.vhd" in Library work.
+Package <clkgen_cfg> compiled.
+Package body <clkgen_cfg> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/sdram/sdram_config.vhd" in Library work.
+Package <sdram_controller_cfg> compiled.
+Package body <sdram_controller_cfg> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/vga/vga_config.vhd" in Library work.
+Package <vga_controller_cfg> compiled.
+Package body <vga_controller_cfg> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/units/rasterizer/line/abssub.vhd" in Library work.
+Entity <abs_sub> compiled.
+Entity <abs_sub> (Architecture <arch_abs_sub>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/spi/spi_adc_entity.vhd" in Library work.
+Entity <SPI_adc> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/units/math/math_pack.vhd" in Library work.
+Package <math_pack> compiled.
+Package body <math_pack> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/chips/fpga_xc3s50.vhd" in Library work.
+Entity <fpga> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" in Library work.
+Entity <clkgen> compiled.
+Entity <clkgen> (Architecture <BEHAVIORAL>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/spi/spi_ctrl.vhd" in Library work.
+Entity <SPI_ctrl> compiled.
+Entity <SPI_ctrl> (Architecture <Arch_SPI_ctrl2>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/chips/architecture_pc/tlv_pc_ifc.vhd" in Library work.
+Entity <tlv_pc_ifc> compiled.
+Compiling vhdl file "C:/fitkitSVN/apps/IMP15/voltmetr/build/fpga/voltmeter_config.vhd" in Library work.
+Package <fpga_cfg> compiled.
+Package body <fpga_cfg> compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/sdram/sdram_raw_ctrl.vhd" in Library work.
+Entity <sdram_raw_controller> compiled.
+Entity <sdram_raw_controller> (Architecture <arch_sdram_raw_controller>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/units/fifo/fifo36.vhd" in Library work.
+Entity <fifo36> compiled.
+Entity <fifo36> (Architecture <a_fifo>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/units/rasterizer/line/rasterizer.vhd" in Library work.
+Entity <rasterizer_line> compiled.
+Entity <rasterizer_line> (Architecture <arch_rasterizer_line>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/vga/vga_ctrl.vhd" in Library work.
+Entity <vga_controller> compiled.
+Entity <vga_controller> (Architecture <arch_vga_controller>) compiled.
+Compiling vhdl file "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" in Library work.
+Entity <tlv_pc_ifc> (Architecture <arch_beh>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/sdram/sdram_ctrl.vhd" in Library work.
+Entity <sdram_controller> compiled.
+Entity <sdram_controller> (Architecture <arch_sdram_controller>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/chips/architecture_pc/arch_pc_ifc.vhd" in Library work.
+Entity <fpga> (Architecture <arch_pc_ifc>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/spi/spi_reg.vhd" in Library work.
+Package <spi_cfg> compiled.
+Entity <SPI_reg> compiled.
+Entity <SPI_reg> (Architecture <beh>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/spi/spi_adc_autoincr.vhd" in Library work.
+Entity <SPI_adc> (Architecture <autoincrement>) compiled.
+Compiling vhdl file "C:/fitkitSVN/fpga/ctrls/spi/spi_adc.vhd" in Library work.
+Entity <SPI_adc> (Architecture <basic>) compiled.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <fpga> in library <work> (architecture <arch_pc_ifc>).
+
+Analyzing hierarchy for entity <clkgen> in library <work> (architecture <BEHAVIORAL>) with generics.
+	FREQ = "dcm_50mhz"
+	GENIBUF = true
+
+Analyzing hierarchy for entity <SPI_ctrl> in library <work> (architecture <Arch_SPI_ctrl2>).
+
+Analyzing hierarchy for entity <tlv_pc_ifc> in library <work> (architecture <arch_beh>).
+
+Analyzing hierarchy for entity <SPI_adc> in library <work> (architecture <basic>) with generics.
+	ADDR_OUT_WIDTH = 1
+	ADDR_WIDTH = 8
+	BASE_ADDR = 0
+	DATA_WIDTH = 48
+	DELAY = 0
+
+Analyzing hierarchy for entity <sdram_raw_controller> in library <work> (architecture <arch_sdram_raw_controller>) with generics.
+	GEN_AUTO_REFRESH = false
+	OPTIMIZE_REFRESH = "oalone"
+
+Analyzing hierarchy for entity <fifo36> in library <work> (architecture <a_fifo>).
+
+Analyzing hierarchy for entity <rasterizer_line> in library <work> (architecture <arch_rasterizer_line>).
+
+Analyzing hierarchy for entity <vga_controller> in library <work> (architecture <arch_vga_controller>) with generics.
+	REQ_DELAY = 4
+
+Analyzing hierarchy for entity <abs_sub> in library <work> (architecture <arch_abs_sub>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <fpga> in library <work> (Architecture <arch_pc_ifc>).
+Entity <fpga> analyzed. Unit <fpga> generated.
+
+Analyzing generic Entity <clkgen> in library <work> (Architecture <BEHAVIORAL>).
+	FREQ = "dcm_50mhz"
+	GENIBUF = true
+WARNING:Xst:2211 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 96: Instantiating black box module <BUFG>.
+WARNING:Xst:2211 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 106: Instantiating black box module <IBUFG>.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK0' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK90' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK180' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK270' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLKDV' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK2X' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLK2X180' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'CLKFX180' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'STATUS' of component 'DCM'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Unconnected output port 'PSDONE' of component 'DCM'.
+WARNING:Xst:2211 - "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd" line 114: Instantiating black box module <DCM>.
+    Set user-defined property "CLKDV_DIVIDE =  2.0000000000000000" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLKFX_DIVIDE =  4" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLKFX_MULTIPLY =  27" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLKIN_DIVIDE_BY_2 =  FALSE" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLKIN_PERIOD =  135.6339999999999900" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLKOUT_PHASE_SHIFT =  NONE" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "CLK_FEEDBACK =  NONE" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "DESKEW_ADJUST =  SYSTEM_SYNCHRONOUS" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "DFS_FREQUENCY_MODE =  LOW" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "DLL_FREQUENCY_MODE =  LOW" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "DSS_MODE =  NONE" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "DUTY_CYCLE_CORRECTION =  TRUE" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "FACTORY_JF =  C080" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "PHASE_SHIFT =  0" for instance <DCM_INST> in unit <clkgen>.
+    Set user-defined property "STARTUP_WAIT =  FALSE" for instance <DCM_INST> in unit <clkgen>.
+Entity <clkgen> analyzed. Unit <clkgen> generated.
+
+Analyzing Entity <SPI_ctrl> in library <work> (Architecture <Arch_SPI_ctrl2>).
+Entity <SPI_ctrl> analyzed. Unit <SPI_ctrl> generated.
+
+Analyzing Entity <tlv_pc_ifc> in library <work> (Architecture <arch_beh>).
+WARNING:Xst:2211 - "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" line 227: Instantiating black box module <BUFG>.
+WARNING:Xst:753 - "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" line 244: Unconnected output port 'ADDR' of component 'SPI_adc'.
+WARNING:Xst:753 - "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" line 244: Unconnected output port 'READ_EN' of component 'SPI_adc'.
+WARNING:Xst:753 - "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" line 270: Unconnected output port 'DATA_VLD' of component 'sdram_raw_controller'.
+WARNING:Xst:753 - "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd" line 328: Unconnected output port 'FIFO_FREE' of component 'fifo36'.
+Entity <tlv_pc_ifc> analyzed. Unit <tlv_pc_ifc> generated.
+
+Analyzing generic Entity <SPI_adc> in library <work> (Architecture <basic>).
+	ADDR_OUT_WIDTH = 1
+	ADDR_WIDTH = 8
+	BASE_ADDR = 0
+	DATA_WIDTH = 48
+	DELAY = 0
+Entity <SPI_adc> analyzed. Unit <SPI_adc> generated.
+
+Analyzing generic Entity <sdram_raw_controller> in library <work> (Architecture <arch_sdram_raw_controller>).
+	GEN_AUTO_REFRESH = false
+	OPTIMIZE_REFRESH = "oalone"
+INFO:Xst:2679 - Register <ref_cnt> in unit <sdram_raw_controller> has a constant value of 0000000000 during circuit operation. The register is replaced by logic.
+Entity <sdram_raw_controller> analyzed. Unit <sdram_raw_controller> generated.
+
+Analyzing Entity <fifo36> in library <work> (Architecture <a_fifo>).
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/fifo/fifo36.vhd" line 113: Unconnected output port 'DOA' of component 'RAMB16_S36_S36'.
+WARNING:Xst:753 - "C:/fitkitSVN/fpga/units/fifo/fifo36.vhd" line 113: Unconnected output port 'DOPA' of component 'RAMB16_S36_S36'.
+WARNING:Xst:2211 - "C:/fitkitSVN/fpga/units/fifo/fifo36.vhd" line 113: Instantiating black box module <RAMB16_S36_S36>.
+    Set user-defined property "INIT_A =  000000000" for instance <fifo_i> in unit <fifo36>.
+    Set user-defined property "INIT_B =  000000000" for instance <fifo_i> in unit <fifo36>.
+    Set user-defined property "SRVAL_A =  000000000" for instance <fifo_i> in unit <fifo36>.
+    Set user-defined property "SRVAL_B =  000000000" for instance <fifo_i> in unit <fifo36>.
+    Set user-defined property "WRITE_MODE_A =  WRITE_FIRST" for instance <fifo_i> in unit <fifo36>.
+    Set user-defined property "WRITE_MODE_B =  WRITE_FIRST" for instance <fifo_i> in unit <fifo36>.
+Entity <fifo36> analyzed. Unit <fifo36> generated.
+
+Analyzing Entity <rasterizer_line> in library <work> (Architecture <arch_rasterizer_line>).
+Entity <rasterizer_line> analyzed. Unit <rasterizer_line> generated.
+
+Analyzing Entity <abs_sub> in library <work> (Architecture <arch_abs_sub>).
+Entity <abs_sub> analyzed. Unit <abs_sub> generated.
+
+Analyzing generic Entity <vga_controller> in library <work> (Architecture <arch_vga_controller>).
+	REQ_DELAY = 4
+Entity <vga_controller> analyzed. Unit <vga_controller> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <SPI_ctrl>.
+    Related source file is "C:/fitkitSVN/fpga/ctrls/spi/spi_ctrl.vhd".
+    Found finite state machine <FSM_0> for signal <pstate>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 1                                              |
+    | Outputs            | 1                                              |
+    | Clock              | CLK                       (rising_edge)        |
+    | Clock enable       | dovld                     (positive)           |
+    | Reset              | SPI_CS                    (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | sinit                                          |
+    | Power Up State     | sinit                                          |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit tristate buffer for signal <SPI_MISO>.
+    Found 1-bit register for signal <spi_clk_1>.
+    Found 1-bit register for signal <spi_clk_2>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   2 D-type flip-flop(s).
+	inferred   1 Tristate(s).
+Unit <SPI_ctrl> synthesized.
+
+
+Synthesizing Unit <SPI_adc>.
+    Related source file is "C:/fitkitSVN/fpga/ctrls/spi/spi_adc.vhd".
+    Found finite state machine <FSM_1> for signal <pstate>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 7                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 4                                              |
+    | Clock              | CLK                       (rising_edge)        |
+    | Reset              | CS                        (negative)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | scmdrcv                                        |
+    | Power Up State     | scmdrcv                                        |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 1-bit tristate buffer for signal <DI>.
+    Found 6-bit up counter for signal <bitcntr>.
+    Found 8-bit register for signal <shreg_addr>.
+    Found 2-bit register for signal <shreg_cmd>.
+    Found 48-bit register for signal <shreg_di>.
+    Found 48-bit register for signal <shreg_do>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   1 Counter(s).
+	inferred 106 D-type flip-flop(s).
+	inferred   1 Tristate(s).
+Unit <SPI_adc> synthesized.
+
+
+Synthesizing Unit <sdram_raw_controller>.
+    Related source file is "C:/fitkitSVN/fpga/ctrls/sdram/sdram_raw_ctrl.vhd".
+WARNING:Xst:646 - Signal <ref_cnt> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_2> for signal <cstate>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 69                                             |
+    | Inputs             | 14                                             |
+    | Outputs            | 19                                             |
+    | Clock              | CLK                       (falling_edge)       |
+    | Reset              | RST                       (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | streset                                        |
+    | Power Up State     | streset                                        |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_3> for signal <cstate_init>.
+    -----------------------------------------------------------------------
+    | States             | 12                                             |
+    | Transitions        | 21                                             |
+    | Inputs             | 1                                              |
+    | Outputs            | 4                                              |
+    | Clock              | CLK                       (falling_edge)       |
+    | Reset              | RST                       (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | csi_begin                                      |
+    | Power Up State     | csi_begin                                      |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Using one-hot encoding for signal <cnt_value>.
+    Using one-hot encoding for signal <ram_a_sel>.
+    Found 4x18-bit ROM for signal <cmd_fifo_reg$rom0000>.
+    Found 8-bit tristate buffer for signal <RAM_D>.
+    Found 13-bit 4-to-1 multiplexer for signal <actrow>.
+    Found 52-bit register for signal <actrows>.
+    Found 2-bit register for signal <bank_bus_reg>.
+    Found 2-bit register for signal <bnk_fifo_reg>.
+    Found 1-bit register for signal <chg_reg>.
+    Found 2-bit register for signal <cmd_fifo_reg>.
+    Found 1-bit register for signal <cmd_ld_xor1>.
+    Found 1-bit register for signal <cmd_ld_xor2>.
+    Found 1-bit xor2 for signal <cmd_loaded>.
+    Found 3-bit up counter for signal <cnt>.
+    Found 9-bit register for signal <col_fifo_reg>.
+    Found 9-bit register for signal <column_bus_reg>.
+    Found 8-bit register for signal <data_bus_reg>.
+    Found 8-bit register for signal <din_fifo_reg>.
+    Found 8-bit register for signal <dout_reg>.
+    Found 1-bit register for signal <fff_reg>.
+    Found 3-bit register for signal <lat_sh>.
+    Found 1-bit register for signal <out_reg>.
+    Found 1-bit register for signal <ref_reg>.
+    Found 12-bit comparator not equal for signal <resel_mx$cmp_ne0000> created at line 264.
+    Found 12-bit register for signal <row_bus_reg>.
+    Found 12-bit register for signal <row_fifo_reg>.
+    Found 1-bit register for signal <sel_reg>.
+    Summary:
+	inferred   2 Finite State Machine(s).
+	inferred   1 ROM(s).
+	inferred   1 Counter(s).
+	inferred 134 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred  13 Multiplexer(s).
+	inferred   8 Tristate(s).
+Unit <sdram_raw_controller> synthesized.
+
+
+Synthesizing Unit <vga_controller>.
+    Related source file is "C:/fitkitSVN/fpga/ctrls/vga/vga_ctrl.vhd".
+    Found finite state machine <FSM_4> for signal <hfsm_cst>.
+    -----------------------------------------------------------------------
+    | States             | 8                                              |
+    | Transitions        | 14                                             |
+    | Inputs             | 5                                              |
+    | Outputs            | 10                                             |
+    | Clock              | CLK                       (rising_edge)        |
+    | Reset              | ireset                    (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | hstdisabled                                    |
+    | Power Up State     | hstdisabled                                    |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_5> for signal <vfsm_cst>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 9                                              |
+    | Inputs             | 4                                              |
+    | Outputs            | 5                                              |
+    | Clock              | CLK                       (rising_edge)        |
+    | Reset              | ireset                    (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | vstprepare                                     |
+    | Power Up State     | vstprepare                                     |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 7-bit comparator equal for signal <h_period_mx$cmp_eq0000> created at line 340.
+    Found 12-bit comparator equal for signal <h_pixels_mx$cmp_eq0000> created at line 336.
+    Found 7-bit comparator equal for signal <h_syncend_mx$cmp_eq0000> created at line 339.
+    Found 7-bit comparator equal for signal <h_syncstart_mx$cmp_eq0000> created at line 338.
+    Found 12-bit up counter for signal <hcnt>.
+    Found 1-bit register for signal <ienable>.
+    Found 12-bit comparator equal for signal <v_lines_mx$cmp_eq0000> created at line 337.
+    Found 6-bit comparator equal for signal <v_period_mx$cmp_eq0000> created at line 343.
+    Found 4-bit comparator equal for signal <v_syncend_mx$cmp_eq0000> created at line 342.
+    Found 6-bit comparator equal for signal <v_syncstart_mx$cmp_eq0000> created at line 341.
+    Found 12-bit up counter for signal <vcnt>.
+    Summary:
+	inferred   2 Finite State Machine(s).
+	inferred   2 Counter(s).
+	inferred   1 D-type flip-flop(s).
+	inferred   8 Comparator(s).
+Unit <vga_controller> synthesized.
+
+
+Synthesizing Unit <abs_sub>.
+    Related source file is "C:/fitkitSVN/fpga/units/rasterizer/line/abssub.vhd".
+    Found 9-bit subtractor for signal <Y>.
+    Found 9-bit comparator greater for signal <iexchg$cmp_gt0000> created at line 64.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <abs_sub> synthesized.
+
+
+Synthesizing Unit <clkgen>.
+    Related source file is "C:/fitkitSVN/fpga/units/clkgen/clkgen.vhd".
+WARNING:Xst:1780 - Signal <CLK1X_BUF> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <clkgen> synthesized.
+
+
+Synthesizing Unit <fifo36>.
+    Related source file is "C:/fitkitSVN/fpga/units/fifo/fifo36.vhd".
+    Found 1-bit register for signal <DATA_VLD>.
+    Found 9-bit up counter for signal <addr_r>.
+    Found 9-bit register for signal <addr_r_prev>.
+    Found 9-bit up counter for signal <addr_w>.
+    Found 9-bit comparator not equal for signal <nfull$cmp_ne0000> created at line 135.
+    Found 9-bit comparator not equal for signal <step$cmp_ne0000> created at line 134.
+    Found 1-bit register for signal <step_reg>.
+    Summary:
+	inferred   2 Counter(s).
+	inferred  11 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+Unit <fifo36> synthesized.
+
+
+Synthesizing Unit <rasterizer_line>.
+    Related source file is "C:/fitkitSVN/fpga/units/rasterizer/line/rasterizer.vhd".
+    Found finite state machine <FSM_6> for signal <cstate>.
+    -----------------------------------------------------------------------
+    | States             | 6                                              |
+    | Transitions        | 9                                              |
+    | Inputs             | 3                                              |
+    | Outputs            | 7                                              |
+    | Clock              | CLK                       (rising_edge)        |
+    | Clock enable       | ENABLE                    (positive)           |
+    | Reset              | RST                       (positive)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | saidle                                         |
+    | Power Up State     | saidle                                         |
+    | Encoding           | automatic                                      |
+    | Implementation     | automatic                                      |
+    -----------------------------------------------------------------------
+    Found 9-bit register for signal <cx>.
+    Found 9-bit adder for signal <cx$addsub0000> created at line 222.
+    Found 9-bit register for signal <cy>.
+    Found 9-bit addsub for signal <cy_i>.
+    Found 9-bit register for signal <dx>.
+    Found 9-bit register for signal <dy>.
+    Found 10-bit comparator greatequal for signal <err_mx$cmp_ge0000> created at line 179.
+    Found 10-bit register for signal <err_reg>.
+    Found 10-bit addsub for signal <err_reg$addsub0000>.
+    Found 9-bit comparator greater for signal <steep$cmp_gt0000> created at line 158.
+    Found 1-bit register for signal <steep_reg>.
+    Found 9-bit register for signal <x1_reg>.
+    Found 9-bit register for signal <x2_reg>.
+    Found 9-bit comparator equal for signal <x_mx$cmp_eq0000> created at line 176.
+    Found 9-bit register for signal <y1_reg>.
+    Found 9-bit register for signal <y2_reg>.
+    Found 1-bit register for signal <ystep>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred  84 D-type flip-flop(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   3 Comparator(s).
+Unit <rasterizer_line> synthesized.
+
+
+Synthesizing Unit <tlv_pc_ifc>.
+    Related source file is "C:/fitkitSVN/apps/IMP15/voltmetr/fpga/top_level.vhd".
+WARNING:Xst:1305 - Output <IRQ> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <X<25>> is never assigned. Tied to value Z.
+WARNING:Xst:1305 - Output <KIN> is never assigned. Tied to value 0000.
+WARNING:Xst:2563 - Inout <X<26>> is never assigned. Tied to value Z.
+WARNING:Xst:1305 - Output <RTS_232> is never assigned. Tied to value 0.
+WARNING:Xst:647 - Input <ACLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1305 - Output <TXD_232> is never assigned. Tied to value 0.
+WARNING:Xst:1305 - Output <ADIN> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <AFBUS<10>> is never assigned. Tied to value Z.
+WARNING:Xst:647 - Input <RXD_232> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2563 - Inout <ABCLK> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <AFBUS<11>> is never assigned. Tied to value Z.
+WARNING:Xst:1305 - Output <LE> is never assigned. Tied to value 0.
+WARNING:Xst:647 - Input <FCLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2563 - Inout <M_DATA> is never assigned. Tied to value 0.
+WARNING:Xst:1305 - Output <LRS> is never assigned. Tied to value 0.
+WARNING:Xst:647 - Input <ADOUT> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1305 - Output <LRW> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <K_CLK> is never assigned. Tied to value 0.
+WARNING:Xst:647 - Input <KOUT> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2563 - Inout <X<6>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<0>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<7>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<1>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<8>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<2>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<9>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<3>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<4>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<5>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<0>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<6>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <ALRCIN> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <AFBUS<1>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <LD<7>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <ALRCOUT> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <AFBUS<2>> is never assigned. Tied to value Z.
+WARNING:Xst:647 - Input <SMCLK> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <CTS_232> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:2563 - Inout <P3M<0>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<3>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<1>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<4>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<10>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<2>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<5>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<11>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<3>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<6>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<12>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<4>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<7>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<13>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<5>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<8>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<14>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<6>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <AFBUS<9>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<20>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<15>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <P3M<7>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<16>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<21>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <M_CLK> is never assigned. Tied to value 0.
+WARNING:Xst:2563 - Inout <X<22>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<17>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<23>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<18>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<24>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <X<19>> is never assigned. Tied to value Z.
+WARNING:Xst:2563 - Inout <K_DATA> is never assigned. Tied to value 0.
+WARNING:Xst:646 - Signal <spi_data<39:36>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <req_row<11:9>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <req_col<11:10>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <buf2sdr_data<35:26>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 1-bit tristate buffer for signal <AFBUS<11>>.
+    Found 1-bit tristate buffer for signal <AFBUS<10>>.
+    Found 1-bit tristate buffer for signal <AFBUS<9>>.
+    Found 1-bit tristate buffer for signal <AFBUS<8>>.
+    Found 1-bit tristate buffer for signal <AFBUS<7>>.
+    Found 1-bit tristate buffer for signal <AFBUS<6>>.
+    Found 1-bit tristate buffer for signal <AFBUS<5>>.
+    Found 1-bit tristate buffer for signal <AFBUS<4>>.
+    Found 1-bit tristate buffer for signal <AFBUS<3>>.
+    Found 1-bit tristate buffer for signal <AFBUS<2>>.
+    Found 1-bit tristate buffer for signal <AFBUS<1>>.
+    Found 1-bit tristate buffer for signal <AFBUS<0>>.
+    Found 1-bit tristate buffer for signal <P3M<7>>.
+    Found 1-bit tristate buffer for signal <P3M<6>>.
+    Found 1-bit tristate buffer for signal <P3M<5>>.
+    Found 1-bit tristate buffer for signal <P3M<4>>.
+    Found 1-bit tristate buffer for signal <P3M<3>>.
+    Found 1-bit tristate buffer for signal <P3M<2>>.
+    Found 1-bit tristate buffer for signal <P3M<1>>.
+    Found 1-bit tristate buffer for signal <P3M<0>>.
+    Found 1-bit tristate buffer for signal <LD<7>>.
+    Found 1-bit tristate buffer for signal <LD<6>>.
+    Found 1-bit tristate buffer for signal <LD<5>>.
+    Found 1-bit tristate buffer for signal <LD<4>>.
+    Found 1-bit tristate buffer for signal <LD<3>>.
+    Found 1-bit tristate buffer for signal <LD<2>>.
+    Found 1-bit tristate buffer for signal <LD<1>>.
+    Found 1-bit tristate buffer for signal <LD<0>>.
+    Found 1-bit tristate buffer for signal <X<26>>.
+    Found 1-bit tristate buffer for signal <X<25>>.
+    Found 1-bit tristate buffer for signal <X<24>>.
+    Found 1-bit tristate buffer for signal <X<23>>.
+    Found 1-bit tristate buffer for signal <X<22>>.
+    Found 1-bit tristate buffer for signal <X<21>>.
+    Found 1-bit tristate buffer for signal <X<20>>.
+    Found 1-bit tristate buffer for signal <X<19>>.
+    Found 1-bit tristate buffer for signal <X<18>>.
+    Found 1-bit tristate buffer for signal <X<17>>.
+    Found 1-bit tristate buffer for signal <X<16>>.
+    Found 1-bit tristate buffer for signal <X<15>>.
+    Found 1-bit tristate buffer for signal <X<14>>.
+    Found 1-bit tristate buffer for signal <X<13>>.
+    Found 1-bit tristate buffer for signal <X<12>>.
+    Found 1-bit tristate buffer for signal <X<11>>.
+    Found 1-bit tristate buffer for signal <X<10>>.
+    Found 1-bit tristate buffer for signal <X<9>>.
+    Found 1-bit tristate buffer for signal <X<8>>.
+    Found 1-bit tristate buffer for signal <X<7>>.
+    Found 1-bit tristate buffer for signal <X<6>>.
+    Found 36-bit register for signal <buf2acc_reg>.
+    Found 1-bit register for signal <buf2acc_set>.
+    Found 1-bit register for signal <CLK_div_reg>.
+    Found 1-bit register for signal <cls_reg>.
+    Found 1-bit register for signal <dti>.
+    Found 1-bit register for signal <grfifo_vld_reg>.
+    Found 1-bit register for signal <spi2buf_we_reg>.
+    Found 1-bit register for signal <spi2buf_we_reg2>.
+    Found 8-bit register for signal <spi_temp>.
+    Found 8-bit register for signal <vga_color>.
+    Summary:
+	inferred  59 D-type flip-flop(s).
+	inferred  49 Tristate(s).
+Unit <tlv_pc_ifc> synthesized.
+
+
+Synthesizing Unit <fpga>.
+    Related source file is "C:/fitkitSVN/fpga/chips/architecture_pc/arch_pc_ifc.vhd".
+WARNING:Xst:647 - Input <SPI_CS> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1780 - Signal <ispi_rst> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <ispi_clk> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <fpga> synthesized.
+
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 1
+ 4x18-bit ROM                                          : 1
+# Adders/Subtractors                                   : 5
+ 10-bit addsub                                         : 1
+ 9-bit adder                                           : 1
+ 9-bit addsub                                          : 1
+ 9-bit subtractor                                      : 2
+# Counters                                             : 8
+ 12-bit up counter                                     : 2
+ 3-bit up counter                                      : 1
+ 6-bit up counter                                      : 1
+ 9-bit up counter                                      : 4
+# Registers                                            : 104
+ 1-bit register                                        : 75
+ 10-bit register                                       : 1
+ 12-bit register                                       : 2
+ 2-bit register                                        : 4
+ 3-bit register                                        : 1
+ 36-bit register                                       : 1
+ 48-bit register                                       : 2
+ 8-bit register                                        : 6
+ 9-bit register                                        : 12
+# Comparators                                          : 18
+ 10-bit comparator greatequal                          : 1
+ 12-bit comparator equal                               : 2
+ 12-bit comparator not equal                           : 1
+ 4-bit comparator equal                                : 1
+ 6-bit comparator equal                                : 2
+ 7-bit comparator equal                                : 3
+ 9-bit comparator equal                                : 1
+ 9-bit comparator greater                              : 3
+ 9-bit comparator not equal                            : 4
+# Multiplexers                                         : 1
+ 13-bit 4-to-1 multiplexer                             : 1
+# Tristates                                            : 52
+ 1-bit tristate buffer                                 : 51
+ 8-bit tristate buffer                                 : 1
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_6> for best encoding.
+Optimizing FSM <fpga_inst/draw/cstate/FSM> on signal <cstate[1:6]> with one-hot encoding.
+------------------------
+ State      | Encoding
+------------------------
+ saidle     | 000001
+ saprecalc  | 000010
+ saprecalc2 | 000100
+ saalgstep1 | 001000
+ saalgstep2 | 010000
+ saalgstep3 | 100000
+------------------------
+Analyzing FSM <FSM_5> for best encoding.
+Optimizing FSM <fpga_inst/vga/vfsm_cst/FSM> on signal <vfsm_cst[1:5]> with one-hot encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ vstprepare    | 00001
+ vstdraw       | 00010
+ vstwaitsync   | 00100
+ vstsync       | 01000
+ vstwaitperiod | 10000
+---------------------------
+Analyzing FSM <FSM_4> for best encoding.
+Optimizing FSM <fpga_inst/vga/hfsm_cst/FSM> on signal <hfsm_cst[1:8]> with one-hot encoding.
+----------------------------
+ State          | Encoding
+----------------------------
+ hstdisabled    | 00000001
+ hstprepare     | 00000010
+ hstrequestonly | 00000100
+ hstdraw        | 00001000
+ hstdrawonly    | 00010000
+ hstwaitsync    | 00100000
+ hstsync        | 01000000
+ hstwaitperiod  | 10000000
+----------------------------
+Analyzing FSM <FSM_3> for best encoding.
+Optimizing FSM <fpga_inst/sdram/cstate_init/FSM> on signal <cstate_init[1:4]> with gray encoding.
+-----------------------
+ State     | Encoding
+-----------------------
+ csi_begin | 0000
+ csi_idle  | 0001
+ csi_chg   | 0011
+ csi_ref1  | 0010
+ csi_ref2  | 0110
+ csi_ref3  | 0111
+ csi_ref4  | 0101
+ csi_ref5  | 0100
+ csi_ref6  | 1100
+ csi_ref7  | 1101
+ csi_lmr   | 1111
+ csi_end   | 1110
+-----------------------
+Analyzing FSM <FSM_2> for best encoding.
+Optimizing FSM <fpga_inst/sdram/cstate/FSM> on signal <cstate[1:9]> with one-hot encoding.
+---------------------------
+ State        | Encoding
+---------------------------
+ streset      | 000000001
+ stidle       | 000000010
+ stcmdwait    | 100000000
+ stcmdlmr     | 000010000
+ stcmdselect  | 000100000
+ stcmdread    | 001000000
+ stcmdwrite   | 010000000
+ stcmdcharge  | 000000100
+ stcmdrefresh | 000001000
+---------------------------
+Analyzing FSM <FSM_1> for best encoding.
+Optimizing FSM <fpga_inst/spidecd/pstate/FSM> on signal <pstate[1:2]> with user encoding.
+----------------------
+ State    | Encoding
+----------------------
+ scmdrcv  | 00
+ saddrrcv | 01
+ sdatarcv | 10
+ snop     | 11
+----------------------
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <spictrl/pstate/FSM> on signal <pstate[1:6]> with one-hot encoding.
+----------------------
+ State    | Encoding
+----------------------
+ sinit    | 000001
+ srcv1    | 000010
+ srcv2    | 001000
+ srcv3    | 010000
+ sactive  | 100000
+ snactive | 000100
+----------------------
+WARNING:Xst:1710 - FF/Latch <shreg_di_27> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_28> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_29> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_30> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_31> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_32> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_33> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_34> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_35> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_36> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_37> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_38> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_39> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_40> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_41> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_42> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_43> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_44> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_45> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_46> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_47> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <bnk_fifo_reg_0> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <bnk_fifo_reg_1> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <row_fifo_reg_9> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <row_fifo_reg_10> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <row_fifo_reg_11> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <ienable> has a constant value of 1 in block <vga>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_0> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_1> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_2> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_3> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_4> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_5> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_6> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_7> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_8> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_9> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_10> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_11> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_12> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_26> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_25> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_24> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_23> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_22> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_21> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_20> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_13> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_14> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_15> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_19> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_18> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_16> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <shreg_di_17> (without init value) has a constant value of 0 in block <spidecd>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bank_bus_reg_1> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bank_bus_reg_0> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_11> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_10> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_9> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_35> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_36> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_37> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_50> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_48> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_49> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_10> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_11> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_9> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_22> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_23> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_24> (without init value) has a constant value of 0 in block <sdram>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <lat_sh_2> of sequential type is unconnected in block <sdram>.
+WARNING:Xst:2677 - Node <shreg_cmd_1> of sequential type is unconnected in block <spidecd>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 7
+# Adders/Subtractors                                   : 5
+ 10-bit addsub                                         : 1
+ 9-bit adder                                           : 1
+ 9-bit addsub                                          : 1
+ 9-bit subtractor                                      : 2
+# Counters                                             : 8
+ 12-bit up counter                                     : 2
+ 3-bit up counter                                      : 1
+ 6-bit up counter                                      : 1
+ 9-bit up counter                                      : 4
+# Registers                                            : 408
+ Flip-Flops                                            : 408
+# Comparators                                          : 18
+ 10-bit comparator greatequal                          : 1
+ 12-bit comparator equal                               : 2
+ 12-bit comparator not equal                           : 1
+ 4-bit comparator equal                                : 1
+ 6-bit comparator equal                                : 2
+ 7-bit comparator equal                                : 3
+ 9-bit comparator equal                                : 1
+ 9-bit comparator greater                              : 3
+ 9-bit comparator not equal                            : 4
+# Multiplexers                                         : 13
+ 1-bit 4-to-1 multiplexer                              : 13
+# Xors                                                 : 1
+ 1-bit xor2                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:1710 - FF/Latch <shreg_di_24> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_25> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_26> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_27> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_28> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_29> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_30> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_31> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_32> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_33> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_34> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_35> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_36> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_37> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_38> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_39> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_40> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_41> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_42> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_43> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_44> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_45> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_46> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_47> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_0> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_1> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_2> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_3> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_4> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_5> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_6> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_7> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_8> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_9> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_10> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_11> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_12> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_13> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_14> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_15> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_16> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_17> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_18> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_19> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_20> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_21> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_22> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <shreg_di_23> (without init value) has a constant value of 0 in block <SPI_adc>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <ienable> has a constant value of 1 in block <vga_controller>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <bnk_fifo_reg_0> in Unit <sdram_raw_controller> is equivalent to the following 4 FFs/Latches, which will be removed : <bnk_fifo_reg_1> <row_fifo_reg_9> <row_fifo_reg_10> <row_fifo_reg_11> 
+WARNING:Xst:1710 - FF/Latch <bnk_fifo_reg_0> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_9> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_10> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <row_bus_reg_11> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bank_bus_reg_0> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <bank_bus_reg_1> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_24> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_23> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_22> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_9> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_11> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_10> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_49> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_48> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_50> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_37> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_35> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <actrows_36> (without init value) has a constant value of 0 in block <sdram_raw_controller>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:2261 - The FF/Latch <actrows_39> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_13> <actrows_26> 
+INFO:Xst:2261 - The FF/Latch <actrows_40> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_14> <actrows_27> 
+INFO:Xst:2261 - The FF/Latch <actrows_41> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_15> <actrows_28> 
+INFO:Xst:2261 - The FF/Latch <actrows_29> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_42> <actrows_16> 
+INFO:Xst:2261 - The FF/Latch <actrows_43> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_17> <actrows_30> 
+INFO:Xst:2261 - The FF/Latch <actrows_44> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_18> <actrows_31> 
+INFO:Xst:2261 - The FF/Latch <actrows_45> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_19> <actrows_32> 
+INFO:Xst:2261 - The FF/Latch <actrows_46> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_20> <actrows_33> 
+INFO:Xst:2261 - The FF/Latch <actrows_34> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_47> <actrows_21> 
+INFO:Xst:2261 - The FF/Latch <actrows_38> in Unit <sdram_raw_controller> is equivalent to the following 2 FFs/Latches, which will be removed : <actrows_51> <actrows_25> 
+WARNING:Xst:2677 - Node <actrows_34> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_29> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_40> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_41> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_43> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_39> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_44> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_45> of sequential type is unconnected in block <sdram_raw_controller>.
+WARNING:Xst:2677 - Node <actrows_46> of sequential type is unconnected in block <sdram_raw_controller>.
+INFO:Xst:1901 - Instance fifo_i in unit fifo_i of type RAMB16_S36_S36 has been replaced by RAMB16
+WARNING:Xst:2677 - Node <fpga_inst/sdram/lat_sh_2> of sequential type is unconnected in block <fpga>.
+INFO:Xst:2261 - The FF/Latch <vfsm_cst_FSM_FFd5> in Unit <vga_controller> is equivalent to the following FF/Latch, which will be removed : <hfsm_cst_FSM_FFd8> 
+WARNING:Xst:2041 - Unit SPI_adc: 1 internal tristate is replaced by logic (pull-up yes): DI.
+
+Optimizing unit <fpga> ...
+
+Optimizing unit <SPI_adc> ...
+
+Optimizing unit <vga_controller> ...
+
+Optimizing unit <abs_sub> ...
+
+Optimizing unit <fifo36> ...
+
+Optimizing unit <rasterizer_line> ...
+WARNING:Xst:2677 - Node <fpga_inst/spidecd/shreg_cmd_1> of sequential type is unconnected in block <fpga>.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+FlipFlop fpga_inst/draw/cstate_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop fpga_inst/draw/cstate_FSM_FFd3 has been replicated 2 time(s)
+FlipFlop fpga_inst/draw/cstate_FSM_FFd4 has been replicated 1 time(s)
+FlipFlop fpga_inst/draw/cstate_FSM_FFd5 has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+Processing Unit <fpga> :
+	Found 2-bit shift register for signal <fpga_inst/sdram/lat_sh_1>.
+	Found 5-bit shift register for signal <fpga_inst/spidecd/shreg_do_40>.
+Unit <fpga> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 411
+ Flip-Flops                                            : 411
+# Shift Registers                                      : 2
+ 2-bit shift register                                  : 1
+ 5-bit shift register                                  : 1
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : build\fpga\voltmeter.ngr
+Top Level Output File Name         : build/fpga/voltmeter.ngc
+Output Format                      : NGC
+Optimization Goal                  : SPEED
+Keep Hierarchy                     : no
+
+Design Statistics
+# IOs                              : 124
+
+Cell Usage :
+# BELS                             : 971
+#      GND                         : 3
+#      INV                         : 20
+#      LUT1                        : 54
+#      LUT2                        : 157
+#      LUT2_D                      : 3
+#      LUT2_L                      : 1
+#      LUT3                        : 205
+#      LUT3_D                      : 2
+#      LUT4                        : 230
+#      LUT4_D                      : 26
+#      LUT4_L                      : 7
+#      MUXCY                       : 146
+#      MUXF5                       : 28
+#      VCC                         : 1
+#      XORCY                       : 88
+# FlipFlops/Latches                : 418
+#      FDC                         : 40
+#      FDC_1                       : 11
+#      FDCE                        : 207
+#      FDCE_1                      : 56
+#      FDCP_1                      : 1
+#      FDE                         : 76
+#      FDP                         : 3
+#      FDP_1                       : 1
+#      FDPE                        : 23
+# RAMS                             : 2
+#      RAMB16                      : 2
+# Shift Registers                  : 2
+#      SRL16E                      : 2
+# Clock Buffers                    : 2
+#      BUFG                        : 2
+# IO Buffers                       : 114
+#      IBUF                        : 3
+#      IBUFG                       : 1
+#      IOBUF                       : 9
+#      OBUF                        : 52
+#      OBUFT                       : 49
+# DCMs                             : 1
+#      DCM                         : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s50pq208-4 
+
+ Number of Slices:                      404  out of    768    52%  
+ Number of Slice Flip Flops:            410  out of   1536    26%  
+ Number of 4 input LUTs:                707  out of   1536    46%  
+    Number used as logic:               705
+    Number used as Shift registers:       2
+ Number of IOs:                         124
+ Number of bonded IOBs:                 114  out of    124    91%  
+    IOB Flip Flops:                       8
+ Number of BRAMs:                         2  out of      4    50%  
+ Number of GCLKs:                         2  out of      8    25%  
+ Number of DCMs:                          1  out of      2    50%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+-------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)   | Load  |
+-----------------------------------+-------------------------+-------+
+SMCLK                              | DCMclkgen/DCM_INST:CLKFX| 386   |
+fpga_inst/CLK_div_reg              | BUFG                    | 36    |
+-----------------------------------+-------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+---------------------------------------------------------------------------+--------------------------------------+-------+
+Control Signal                                                             | Buffer(FF name)                      | Load  |
+---------------------------------------------------------------------------+--------------------------------------+-------+
+reset(reset1:O)                                                            | NONE(fpga_inst/CLK_div_reg)          | 271   |
+fpga_inst/spidecd/CS_inv(fpga_inst/spidecd/CS_inv1:O)                      | NONE(fpga_inst/spidecd/CS_inv_shift1)| 65    |
+SPI_FPGA_CS                                                                | IBUF                                 | 5     |
+fpga_inst/sdram/cmd_ld_xor2_and0000(fpga_inst/sdram/cmd_ld_xor2_and00001:O)| NONE(fpga_inst/sdram/cmd_ld_xor2)    | 1     |
+fpga_inst/sdram/cmd_ld_xor2_and0001(fpga_inst/sdram/cmd_ld_xor2_and00011:O)| NONE(fpga_inst/sdram/cmd_ld_xor2)    | 1     |
+---------------------------------------------------------------------------+--------------------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 126.244ns (Maximum Frequency: 7.921MHz)
+   Minimum input arrival time before clock: 8.281ns
+   Maximum output required time after clock: 19.154ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SMCLK'
+  Clock period: 126.244ns (frequency: 7.921MHz)
+  Total number of paths / destination ports: 1497209 / 767
+-------------------------------------------------------------------------
+Delay:               18.703ns (Levels of Logic = 27)
+  Source:            fpga_inst/draw/cstate_FSM_FFd5_1 (FF)
+  Destination:       fpga_inst/draw/steep_reg (FF)
+  Source Clock:      SMCLK rising 6.8X
+  Destination Clock: SMCLK rising 6.8X
+
+  Data Path: fpga_inst/draw/cstate_FSM_FFd5_1 to fpga_inst/draw/steep_reg
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             2   0.720   1.216  fpga_inst/draw/cstate_FSM_FFd5_1 (fpga_inst/draw/cstate_FSM_FFd5_1)
+     LUT4:I0->O            1   0.551   0.000  fpga_inst/draw/as2_a<0>11 (fpga_inst/draw/as2_a<0>1)
+     MUXF5:I0->O          18   0.360   1.443  fpga_inst/draw/as2_a<0>1_f5 (fpga_inst/draw/N01)
+     LUT4:I3->O            3   0.551   1.246  fpga_inst/draw/as2_b<0>1 (fpga_inst/draw/as2_b<0>)
+     LUT2:I0->O            1   0.551   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_lut<0> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_lut<0>)
+     MUXCY:S->O            1   0.500   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<0> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<0>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<1> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<1>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<2> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<2>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<3> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<3>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<4> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<4>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<5> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<5>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<6> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<6>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<7> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<7>)
+     MUXCY:CI->O           9   0.303   1.192  fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<8> (fpga_inst/draw/asub2/Mcompar_iexchg_cmp_gt0000_cy<8>)
+     LUT3:I2->O            1   0.551   0.869  fpga_inst/draw/asub2/Y_mux0000<0>1 (fpga_inst/draw/asub2/Y_mux0000<0>)
+     LUT4:I2->O            1   0.551   0.000  fpga_inst/draw/asub2/Msub_Y_lut<0> (fpga_inst/draw/asub2/Msub_Y_lut<0>)
+     MUXCY:S->O            1   0.500   0.000  fpga_inst/draw/asub2/Msub_Y_cy<0> (fpga_inst/draw/asub2/Msub_Y_cy<0>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<1> (fpga_inst/draw/asub2/Msub_Y_cy<1>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<2> (fpga_inst/draw/asub2/Msub_Y_cy<2>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<3> (fpga_inst/draw/asub2/Msub_Y_cy<3>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<4> (fpga_inst/draw/asub2/Msub_Y_cy<4>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<5> (fpga_inst/draw/asub2/Msub_Y_cy<5>)
+     MUXCY:CI->O           1   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<6> (fpga_inst/draw/asub2/Msub_Y_cy<6>)
+     MUXCY:CI->O           0   0.064   0.000  fpga_inst/draw/asub2/Msub_Y_cy<7> (fpga_inst/draw/asub2/Msub_Y_cy<7>)
+     XORCY:CI->O           2   0.904   1.072  fpga_inst/draw/asub2/Msub_Y_xor<8> (fpga_inst/draw/as2_y<8>)
+     LUT2:I1->O            1   0.551   0.000  fpga_inst/draw/Mcompar_steep_cmp_gt0000_lut<8> (fpga_inst/draw/Mcompar_steep_cmp_gt0000_lut<8>)
+     MUXCY:S->O           37   0.739   1.882  fpga_inst/draw/Mcompar_steep_cmp_gt0000_cy<8> (fpga_inst/draw/Mcompar_steep_cmp_gt0000_cy<8>)
+     INV:I->O              1   0.551   0.801  fpga_inst/draw/Mcompar_steep_cmp_gt0000_cy<8>_inv_INV_0 (fpga_inst/draw/steep)
+     FDE:D                     0.203          fpga_inst/draw/steep_reg
+    ----------------------------------------
+    Total                     18.703ns (8.982ns logic, 9.721ns route)
+                                       (48.0% logic, 52.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'fpga_inst/CLK_div_reg'
+  Clock period: 12.446ns (frequency: 80.347MHz)
+  Total number of paths / destination ports: 1642 / 47
+-------------------------------------------------------------------------
+Delay:               12.446ns (Levels of Logic = 7)
+  Source:            fpga_inst/vga/hcnt_1 (FF)
+  Destination:       fpga_inst/vga/hcnt_11 (FF)
+  Source Clock:      fpga_inst/CLK_div_reg rising
+  Destination Clock: fpga_inst/CLK_div_reg rising
+
+  Data Path: fpga_inst/vga/hcnt_1 to fpga_inst/vga/hcnt_11
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              5   0.720   1.260  fpga_inst/vga/hcnt_1 (fpga_inst/vga/hcnt_1)
+     LUT4:I0->O            3   0.551   1.246  fpga_inst/vga/h_pixels_mx11 (fpga_inst/vga/N0)
+     LUT3:I0->O            5   0.551   0.947  fpga_inst/vga/h_pixels_mx21 (fpga_inst/vga/N4)
+     LUT4:I3->O            1   0.551   0.827  fpga_inst/vga/h_pixels_mx_SW0 (N161)
+     LUT4:I3->O            3   0.551   1.246  fpga_inst/vga/h_pixels_mx (fpga_inst/vga/h_pixels_mx)
+     LUT4:I0->O            1   0.551   0.827  fpga_inst/vga/hcnt_reset32_SW0 (N370)
+     LUT4:I3->O           12   0.551   1.313  fpga_inst/vga/hcnt_reset32 (fpga_inst/vga/hcnt_reset)
+     LUT2:I1->O            1   0.551   0.000  fpga_inst/vga/Mcount_hcnt_eqn_91 (fpga_inst/vga/Mcount_hcnt_eqn_9)
+     FDC:D                     0.203          fpga_inst/vga/hcnt_9
+    ----------------------------------------
+    Total                     12.446ns (4.780ns logic, 7.666ns route)
+                                       (38.4% logic, 61.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'SMCLK'
+  Total number of paths / destination ports: 92 / 92
+-------------------------------------------------------------------------
+Offset:              8.281ns (Levels of Logic = 3)
+  Source:            P3M<0> (PAD)
+  Destination:       fpga_inst/draw/cy_8 (FF)
+  Destination Clock: SMCLK rising 6.8X
+
+  Data Path: P3M<0> to fpga_inst/draw/cy_8
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IOBUF:IO->O           6   0.821   1.198  P3M_0_IOBUF (N210)
+     LUT2:I1->O          274   0.551   3.434  reset1 (reset)
+     LUT4:I1->O            9   0.551   1.124  fpga_inst/draw/cy_and00001 (fpga_inst/draw/cy_and0000)
+     FDE:CE                    0.602          fpga_inst/draw/cy_0
+    ----------------------------------------
+    Total                      8.281ns (2.525ns logic, 5.756ns route)
+                                       (30.5% logic, 69.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'fpga_inst/CLK_div_reg'
+  Total number of paths / destination ports: 485 / 10
+-------------------------------------------------------------------------
+Offset:              19.154ns (Levels of Logic = 8)
+  Source:            fpga_inst/vga/vcnt_3 (FF)
+  Destination:       X<30> (PAD)
+  Source Clock:      fpga_inst/CLK_div_reg rising
+
+  Data Path: fpga_inst/vga/vcnt_3 to X<30>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             5   0.720   1.260  fpga_inst/vga/vcnt_3 (fpga_inst/vga/vcnt_3)
+     LUT4:I0->O            1   0.551   0.000  fpga_inst/vga/v_lines_mx11 (fpga_inst/vga/v_lines_mx1)
+     MUXF5:I1->O           4   0.360   1.256  fpga_inst/vga/v_lines_mx1_f5 (fpga_inst/vga/N3)
+     LUT3:I0->O            2   0.551   1.216  fpga_inst/vga/vcnt_reset11 (fpga_inst/vga/vcnt_reset11)
+     LUT4:I0->O           19   0.551   1.645  fpga_inst/vga/out_en<1> (fpga_inst/vga/out_en<1>)
+     LUT3:I1->O           10   0.551   1.473  fpga_inst/vga/ADDR_COLUMN_cmp_eq00001 (fpga_inst/vga/ADDR_COLUMN_cmp_eq0000)
+     LUT4_D:I0->O         10   0.551   1.473  fpga_inst/sdr_req_read32 (fpga_inst/sdr_req_read)
+     LUT4:I0->O            1   0.551   0.801  fpga_inst/vga/VGA_RED<2> (X_35_OBUF)
+     OBUF:I->O                 5.644          X_35_OBUF (X<35>)
+    ----------------------------------------
+    Total                     19.154ns (10.030ns logic, 9.124ns route)
+                                       (52.4% logic, 47.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SMCLK'
+  Total number of paths / destination ports: 111 / 34
+-------------------------------------------------------------------------
+Offset:              12.123ns (Levels of Logic = 4)
+  Source:            fpga_inst/sdram/cstate_FSM_FFd1 (FF)
+  Destination:       RA<5> (PAD)
+  Source Clock:      SMCLK falling 6.8X
+
+  Data Path: fpga_inst/sdram/cstate_FSM_FFd1 to RA<5>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC_1:C->Q           12   0.720   1.457  fpga_inst/sdram/cstate_FSM_FFd1 (fpga_inst/sdram/cstate_FSM_FFd1)
+     LUT2:I0->O            2   0.551   0.903  fpga_inst/sdram/cstate_FSM_Out12_SW0 (N0)
+     LUT4:I3->O            2   0.551   0.945  fpga_inst/sdram/cstate_FSM_Out18 (RA_9_OBUF)
+     LUT4:I2->O            1   0.551   0.801  fpga_inst/sdram/RAM_A<5> (RA_5_OBUF)
+     OBUF:I->O                 5.644          RA_5_OBUF (RA<5>)
+    ----------------------------------------
+    Total                     12.123ns (8.017ns logic, 4.106ns route)
+                                       (66.1% logic, 33.9% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 11.18 secs
+ 
+--> 
+
+Total memory usage is 155224 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  253 (   0 filtered)
+Number of infos    :   15 (   0 filtered)
+

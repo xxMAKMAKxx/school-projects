@@ -1,0 +1,187 @@
+#!/bin/bash
+
+#######################################
+#	         TESTOVACI SADA	          #
+# IPK proj2                           #
+# by Martin Kacmarcik                 #
+# xkacma03                            #
+# Fakulta informacnich technologii    #
+# Vysoke uceni technicke v Brn2       #
+# For the horde!!!                    #
+#######################################
+
+chmod +x ipkhttpserver
+chmod +x ipkhttpclient
+
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+BLACK="\033[0m"
+
+echo 'Cleaning:'
+make clean
+echo 'Starting tests:'
+echo '-------------------------------'
+
+#Test 1 - want index, expecting index file in payload.
+echo 'Test1: Want index, expecting 200 OK header'
+echo './ipkhttpserver -p 8111'
+./ipkhttpserver -p 8111 &
+sleep 1
+echo './ipkhttpclient http://localhost:8111'
+./ipkhttpclient http://localhost:8111
+PAYLOAD=`ls | grep *.payload`
+diff ${PAYLOAD} ./www/index
+if [ $? = 0 ]
+then
+	echo -e "TEST1: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST1: ${RED}WRONG${BLACK}"
+fi
+make clean
+kill %%
+###############################################
+#Test 2 - file not found, expecting 404 Not found header, also using another port.
+echo '------------------'
+echo 'Test 2 - file not found, expecting 404 Not found header.'
+echo './ipkhttpserver -p 8222'
+PID= ./ipkhttpserver -p 8222 &
+sleep 1
+echo './ipkhttpclient http://localhost:8222/neexistuje'
+./ipkhttpclient http://localhost:8222/neexistuje
+HEADER=`ls | grep *.header`
+diff ${HEADER} ./test_folder/notFound
+if [ $? = 0 ]
+then
+	echo -e "TEST2: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST2: ${RED}WRONG${BLACK}"
+fi
+make clean
+kill %%
+###############################################
+#Test 3 - big chunked file, expecting velky in payload.
+echo '------------------'
+echo 'Test 3 - big chunked file, expecting velky in payload.'
+echo './ipkhttpserver -p 8333'
+PID= ./ipkhttpserver -p 8333 &
+sleep 1
+echo './ipkhttpclient http://localhost:8333/velky'
+./ipkhttpclient http://localhost:8333/velky
+HEADER=`ls | grep *.payload`
+diff ${HEADER} ./www/velky
+if [ $? = 0 ]
+then
+	echo -e "TEST3: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST3: ${RED}WRONG${BLACK}"
+fi
+make clean
+kill %%
+###############################################
+#Test 4 - -c param test - small number (10).
+echo '------------------'
+echo 'Test 4 - -c param test - small number (10).'
+echo './ipkhttpserver -p 8444 -c 10'
+PID= ./ipkhttpserver -p 8444 -c 10 &
+sleep 1
+echo './ipkhttpclient http://localhost:8444/index'
+./ipkhttpclient http://localhost:8444/index
+HEADER=`ls | grep *.payload`
+diff ${HEADER} ./www/index
+if [ $? = 0 ]
+then
+	echo -e "TEST4: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST4: ${RED}WRONG${BLACK}"
+fi
+make clean
+kill %%
+###############################################
+#Test 5 - -t param test - it should wait a bit.
+echo '------------------'
+echo 'Test 5 - -t param test - it should wait a bit.'
+echo './ipkhttpserver -p 8877 -t 1000'
+PID= ./ipkhttpserver -p 8877 -t 1000 &
+sleep 1
+echo './ipkhttpclient http://localhost:8877'
+./ipkhttpclient http://localhost:8877
+#if it can get to the echo, the test is ok and it make it trough, maybe user can check the time in terminal...
+echo -e "TEST5: ${GREEN}OK${BLACK}"
+make clean
+kill %%
+###############################################
+#Test 6 now I will request from client a web http://www.pivovarska14.xf.cz.
+echo '------------------'
+echo 'Test 6 now I will request from client a web http://www.pivovarska14.xf.cz.'
+echo './ipkhttpclient http://www.pivovarska14.xf.cz'
+./ipkhttpclient http://www.pivovarska14.xf.cz
+HEADER=`ls | grep *.payload`
+diff ${HEADER} ./test_folder/pivovarska14
+if [ $? = 0 ]
+then
+	echo -e "TEST6: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST6: ${RED}WRONG${BLACK}"
+fi
+make clean
+###############################################
+#Test 7 - Big chunk size (9000).
+echo '------------------'
+echo 'Test 7 - Big chunk size (9000).'
+echo './ipkhttpserver -p 8123'
+PID= ./ipkhttpserver -p 8123 -c 9000 &
+sleep 1
+echo './ipkhttpclient http://localhost:8123/velky'
+./ipkhttpclient http://localhost:8123/velky
+HEADER=`ls | grep *.payload`
+diff ${HEADER} ./www/velky
+if [ $? = 0 ]
+then
+	echo -e "TEST7: ${GREEN}OK${BLACK}"
+else
+	echo -e "TEST7: ${RED}WRONG${BLACK}"
+fi
+make clean
+kill %%
+###############################################
+#Test 8 - Argument test - Port not number.
+echo '------------------'
+echo 'Test 8 - Argument test - Port not number.'
+echo './ipkhttpserver -p ASDASDASDASDASD'
+PID= ./ipkhttpserver -p ASDASDASDASDASD
+if [ $? = 0 ]
+then
+	echo -e "TEST8: ${RED}WRONG${BLACK}"
+else
+	echo -e "TEST8: ${GREEN}OK${BLACK}"
+fi
+make clean
+###############################################
+#Test 9 - Argument test - Chunk size not number.
+echo '------------------'
+echo 'Test 9 - Argument test - Chunk size not number.'
+echo './ipkhttpserver -c ASDASDASDASDASD'
+PID= ./ipkhttpserver -c ASDASDASDASDASD
+if [ $? = 0 ]
+then
+	echo -e "TEST9: ${RED}WRONG${BLACK}"
+else
+	echo -e "TEST9: ${GREEN}OK${BLACK}"
+fi
+make clean
+###############################################
+#Test 10 - Argument test - Chunk time not number.
+echo '------------------'
+echo 'Test 10 - Argument test - Chunk timeize not number.'
+echo './ipkhttpserver -t ASDASDASDASDASD'
+PID= ./ipkhttpserver -t ASDASDASDASDASD
+if [ $? = 0 ]
+then
+	echo -e "TEST10: ${RED}WRONG${BLACK}"
+else
+	echo -e "TEST10: ${GREEN}OK${BLACK}"
+fi
+make clean
+
+echo '-------------------------------'
+echo 'End of testing'

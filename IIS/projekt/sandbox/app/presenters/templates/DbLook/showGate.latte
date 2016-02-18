@@ -1,0 +1,15 @@
+{block content}
+    <h1 n:block="title">Seznam dostupnych Gatu:</h1>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+    {foreach $gates as $gate}
+    <div class="post">
+
+        <h2>Gate ID: {$gate->gate_id}</h2>
+
+        <div>Kapacita: {$gate->capacity}</div>
+		<div>Typ gatu: {$gate->gate_type}</div>
+		<div>ID terminalu: {$gate->terminal_id}</div>
+    </div>
+    {/foreach}
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br></br></br>
+{/block}

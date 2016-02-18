@@ -1,0 +1,7 @@
+parameters:
+
+
+database:
+	dsn: 'mysql:host=wm94.wedos.net;dbname=d107203_iis'
+	user: a107203_iis
+	password: Martin123!

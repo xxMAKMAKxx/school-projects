@@ -1,0 +1,35 @@
+{block content}
+
+    <h1> Vyhledat letadlo </h1>
+    <p><u>Pozn.:</u> polia nie su povinne. Zadajte ktorekolvek, ktore potrebujete.</p>
+    <p><b>Dejte si pozor na chybnou kombinaci!</b></p>
+    <br>
+	<a n:href="Menu:mainMenu">Zpet do menu</a></br>
+
+    <center>{control searchPlaneForm}</center>
+
+    {foreach $planes as $plane}
+        <div class="post">
+
+            <h2>Plane ID: {$plane->plane_id}</h2>
+            <div><b>Typ letadla:</b> {$plane->plane_type}</div>
+            <div><b>Vyrobca:</b> {$plane->manufacturer}</div>
+            <div><b>Pocet miest:</b> {$plane->related('Seat.plane_id')->count('Seat.seat_number')}</div>
+            <div><b>Datum vyroby:</b> {date("F jS, Y",strtotime($plane->manufacture_date))}</div>
+            <div><b>Posledni revize:</b> {date("F jS, Y",strtotime($plane->last_revision))}</div>
+            <div><b>Pocet clenu posadky:</b> {$plane->crew_number}</div>
+            <div><b>Pocet motorov:</b> {$plane->number_of_engines}</div>
+            <div><b>Sirka:</b> {$plane->width}m</div>
+            <div><b>Dlouzka:</b> {$plane->lenght}m</div>
+            <div><b>Vejska:</b> {$plane->height}m</div>
+
+            {if $user->isInRole('manager') || $user->isInRole('supervisor') }
+                <center><a n:href="DbAdd:editPlane $plane->plane_id">Upravit letadlo</a></center>
+                <center><a n:href="DbLook:checkRevision $plane->plane_id">Zkontrolovat revizi</a></center>
+            {/if}
+        </div>
+    {/foreach}
+
+    </br></br><a n:href="Menu:mainMenu">Zpet do menu</a>
+
+{/block}

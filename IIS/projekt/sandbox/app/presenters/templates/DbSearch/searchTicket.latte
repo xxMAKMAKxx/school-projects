@@ -1,0 +1,36 @@
+{block content}
+
+    <h1> Seznam letenek {ifset $flight_id}letu: {$flight_id}{/ifset}</h1>
+    <br>
+	<a n:href="DbSearch:searchFlight">Zpet na seznam letov</a></br>
+
+    <center>{control searchTicketForm}</center>
+
+    {foreach $tickets as $ticket}
+        <div class="post">
+
+            <h2>Cislo letenky: {$ticket->ticket_id}</h2>
+
+            <div><b>Meno:</b> {$ticket->passenger_name.' '.$ticket->passenger_surname}</div>
+    		<div><b>E-mail:</b> {$ticket->passenger_email}</div>
+    		<div><b>Cislo pasu:</b> {$ticket->passport_number}</div>
+            <div><b>Cena:</b> {$ticket->ticket_price}</div>
+    		<div><b>Spolecnost:</b> {$ticket->ref('Flight', 'flight_id')->company}</div>
+            <div><b>Cislo sedadla:</b> {$ticket->seat_number}</div>
+            <div><b>Cislo letu:</b> {$ticket->flight_id}</div>
+    		<div><b>Typ letadla:</b> {$ticket->ref('Plane', 'plane_id')->plane_type}</div>
+    		{if $ticket->boarding_pass == 'T'}
+    		    <div><b>Vydana vstupenka:</b> <span style="color: green">ANO</span></div>
+    		{else}
+    		    <div><b>Vydana vstupenka:</b> <span style="color: red">NE</span></div>
+                <center><a n:href="DbAdd:giveTicket $ticket->ticket_id">Vydat vstupenku</a></center>
+    		{/if}
+    		{if $user->isInRole('manager') || $user->isInRole('supervisor')}
+    		    <center><a n:href="DbEdit:editSeat $ticket->ticket_id">Zmenit sedadlo</a></center>
+            {/if}
+        </div>
+    {/foreach}
+
+    </br></br><a n:href="Menu:mainMenu">Zpet do menu</a>
+
+{/block}
